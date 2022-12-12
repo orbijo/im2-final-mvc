@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 12, 2022 at 08:05 AM
+-- Generation Time: Dec 12, 2022 at 08:17 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -271,11 +271,18 @@ ALTER TABLE `projects`
   ADD PRIMARY KEY (`project_id`);
 
 --
+-- Indexes for table `project_suppliers`
+--
+ALTER TABLE `project_suppliers`
+  ADD KEY `ps_supplier_fk` (`supplier_id`),
+  ADD KEY `ps_project_fk` (`project_id`);
+
+--
 -- Indexes for table `project_workers`
 --
 ALTER TABLE `project_workers`
-  ADD KEY `project_fk` (`project_id`),
-  ADD KEY `worker_fk` (`worker_id`);
+  ADD KEY `pw_project_fk` (`project_id`),
+  ADD KEY `pw_worker_fk` (`worker_id`);
 
 --
 -- Indexes for table `regions`
@@ -287,6 +294,7 @@ ALTER TABLE `regions`
 -- Indexes for table `suppliers`
 --
 ALTER TABLE `suppliers`
+  ADD PRIMARY KEY (`supplier_id`),
   ADD KEY `supplier_location` (`location_id`);
 
 --
@@ -294,9 +302,9 @@ ALTER TABLE `suppliers`
 --
 ALTER TABLE `workers`
   ADD PRIMARY KEY (`worker_id`),
-  ADD KEY `worker_job_fk` (`job_id`),
   ADD KEY `worker_foreman_fk` (`foreman_id`),
-  ADD KEY `worker_location_fk` (`location_id`);
+  ADD KEY `worker_location_fk` (`location_id`),
+  ADD KEY `worker_job_fk` (`job_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -367,11 +375,18 @@ ALTER TABLE `locations`
   ADD CONSTRAINT `location_country_fk` FOREIGN KEY (`country_id`) REFERENCES `countries` (`country_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
+-- Constraints for table `project_suppliers`
+--
+ALTER TABLE `project_suppliers`
+  ADD CONSTRAINT `ps_project_fk` FOREIGN KEY (`project_id`) REFERENCES `projects` (`project_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `ps_supplier_fk` FOREIGN KEY (`supplier_id`) REFERENCES `suppliers` (`supplier_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
 -- Constraints for table `project_workers`
 --
 ALTER TABLE `project_workers`
-  ADD CONSTRAINT `project_fk` FOREIGN KEY (`project_id`) REFERENCES `projects` (`project_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `worker_fk` FOREIGN KEY (`worker_id`) REFERENCES `workers` (`worker_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `pw_project_fk` FOREIGN KEY (`project_id`) REFERENCES `projects` (`project_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `pw_worker_fk` FOREIGN KEY (`worker_id`) REFERENCES `workers` (`worker_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `suppliers`
@@ -384,6 +399,7 @@ ALTER TABLE `suppliers`
 --
 ALTER TABLE `workers`
   ADD CONSTRAINT `worker_foreman_fk` FOREIGN KEY (`foreman_id`) REFERENCES `workers` (`worker_id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  ADD CONSTRAINT `worker_job_fk` FOREIGN KEY (`job_id`) REFERENCES `jobs` (`job_id`) ON DELETE SET NULL ON UPDATE CASCADE,
   ADD CONSTRAINT `worker_location_fk` FOREIGN KEY (`location_id`) REFERENCES `locations` (`location_id`) ON UPDATE CASCADE;
 COMMIT;
 
