@@ -9,6 +9,17 @@ class Workers {
         //console_log($workers->getDetails());
         $data['workers'] = $workers->getDetails();
 
-        $this->view('workers', $data);
+        $this->view('workers/index', $data);
+    }
+
+    public function show($id) {
+        $worker = new Worker;
+        $countries = new Country;
+        $data['worker'] = $worker->first(['worker_id'=>$id]);
+        //$worker->first(['worker_id'=>$id])->with('locations');
+
+        $data['countries'] = $countries->findAll();
+        console_log($data);
+        $this->view('workers/show', $data);
     }
 }

@@ -8,7 +8,7 @@ Trait Model {
     
     protected $limit = 10;
     protected $offset = 0;
-    protected $order_type = 'ASC';
+    protected $order_type = 'DESC';
 
     public function findAll() {
         
@@ -53,7 +53,7 @@ Trait Model {
         return $this->query($query, $data);
     }
 
-    public function first($data, $data_not) {
+    public function first($data, $data_not = []) {
         /**
          * General function to GET FIRST
          */
@@ -76,7 +76,7 @@ Trait Model {
         $query .= " LIMIT $this->limit OFFSET $this->offset";
 
         /** THIS LINE SHOWS THE COMPLETE QUERY */
-        // echo $query;
+        console_log($query);
         
         $data = array_merge($data, $data_not);
         $result = $this->query($query, $data);
@@ -110,7 +110,7 @@ Trait Model {
         $query = "INSERT INTO $this->table (".implode(", ", $keys).") VALUES (:".implode(", :", $keys).")";
 
         /** THIS LINE SHOWS THE COMPLETE QUERY */
-        echo $query;
+        // echo $query;
 
         // RUN THE QUERY USING query() function inherited from Trait Database.php
         $this->query($query, $data);
@@ -168,4 +168,25 @@ Trait Model {
 
         return false;
     }
+
+    public function firstWithRelationships($data, $data_not = []) {
+        /**
+         * General function to GET FIRST WITH DATA FROM FOREIGN TABLES
+         */
+
+        // $query = "SELECT workers.*, locations.street_address, locations.postal_code, locations.city, locations.state_province FROM workers
+        // INNER JOIN locations ON workers.location_id = locations.location_id
+        // WHERE workers.worker_id = 3";
+
+
+        $query = "SELECT " . $this->table . "*, ";
+        if(!empty($this->relations)){
+            foreach ($this->relations as $key => $value) {
+                $query .= "";
+            }
+        }
+
+        return false;
+    }
+
 }
