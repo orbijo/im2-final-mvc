@@ -15,10 +15,10 @@ class Workers {
     public function show($id = 0) {
         $worker = new Worker;
         $countries = new Country;
-        $data['worker'] = $worker->first(['worker_id'=>$id]);
-        //$worker->first(['worker_id'=>$id])->with('locations');
 
         $data['countries'] = $countries->findAll();
+        $data['worker'] = $worker->firstWithRelations(['worker_id'=>$id]);
+
         console_log($data);
         $this->view('workers/show', $data);
     }

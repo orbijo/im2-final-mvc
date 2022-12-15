@@ -41,7 +41,7 @@ Trait Model {
             $query .= $key . " != :" . $key . " && ";
         }
         $query = trim($query, " && ");
-        $query .= " ORRDER BY $this->table_id $this->order_type LIMIT $this->limit OFFSET $this->offset";
+        $query .= " ORDER BY $this->table_id $this->order_type LIMIT $this->limit OFFSET $this->offset";
 
         // MERGE NOT CLAUSES DATA TO $data
         $data = array_merge($data, $data_not);
@@ -73,10 +73,10 @@ Trait Model {
             $query .= $key . " != :" . $key . " && ";
         }
         $query = trim($query, " && ");
-        $query .= " LIMIT $this->limit OFFSET $this->offset";
+        $query .= " LIMIT 1 OFFSET $this->offset";
 
         /** THIS LINE SHOWS THE COMPLETE QUERY */
-        console_log($query);
+        //console_log($query);
         
         $data = array_merge($data, $data_not);
         $result = $this->query($query, $data);
@@ -169,21 +169,104 @@ Trait Model {
         return false;
     }
 
-    public function firstWithRelationships($data, $data_not = []) {
+    public function whereWithRelations($data, $data_not = []) {
         /**
-         * General function to GET FIRST WITH DATA FROM FOREIGN TABLES
+         * General Function to GET WHERE: conidtion 
          */
 
-        // $query = "SELECT workers.*, locations.street_address, locations.postal_code, locations.city, locations.state_province FROM workers
-        // INNER JOIN locations ON workers.location_id = locations.location_id
-        // WHERE workers.worker_id = 3";
+        // GET THE KEYS OF THE ARRAY AND STORE THEM INTO $keys
+        $keys = array_keys($data);
+        $keys_not = array_keys($data_not);
 
-
-        $query = "SELECT " . $this->table . "*, ";
-        if(!empty($this->relations)){
-            foreach ($this->relations as $key => $value) {
-                $query .= "";
+        // INITIALIZE QUERY STATEMENT
+        // $query = "SELECT * (FROM $this->table WHERE)";
+        $query = "SELECT $this->table.$this->table_id";
+        foreach ($this->allowedColumns as $key) {
+            if(!in_array($key, $this->relations)){
+                $query .= ", $this->table.$key";
             }
+        }
+        foreach ($this->relations as $key => $value) {
+            $query .= ", $key.*";
+        }
+
+        $query .= " FROM $this->table";
+
+        // JOINS
+        foreach ($this->relations as $key => $value) {
+            $query .= " LEFT JOIN $key ON $this->table.$value = $key.$value";
+        }
+
+        // ADDING THE CONDITIONS TO THE QUERY
+        $query .= " WHERE ";
+        foreach($keys as $key) {
+            $query .= $this->table.".".$key . " = :" . $key . " && ";
+        }
+        foreach($keys_not as $key) {
+            $query .= $this->table.".".$key . " != :" . $key . " && ";
+        }
+        $query = trim($query, " && ");
+        $query .= " ORDER BY $this->table_id $this->order_type LIMIT $this->limit OFFSET $this->offset";
+
+        // MERGE NOT CLAUSES DATA TO $data
+        $data = array_merge($data, $data_not);
+
+        /** THIS LINE SHOWS THE COMPLETE QUERY (UNCOMMENT TO SHOW ON PAGE THE COMPLETE QUERY) */
+        //console_log($query);
+
+        // GET AND RETURN THE RESULT BY USING query() function inherited from Trait Database.php
+        return $this->query($query, $data);
+    }
+
+    public function firstWithRelations($data, $data_not = []) {
+        /**
+         * General Function to GET WHERE: conidtion 
+         */
+
+        // GET THE KEYS OF THE ARRAY AND STORE THEM INTO $keys
+        $keys = array_keys($data);
+        $keys_not = array_keys($data_not);
+
+        // INITIALIZE QUERY STATEMENT
+        // $query = "SELECT * (FROM $this->table WHERE)";
+        $query = "SELECT $this->table.$this->table_id";
+        foreach ($this->allowedColumns as $key) {
+            if(!in_array($key, $this->relations)){
+                $query .= ", $this->table.$key";
+            }
+        }
+        foreach ($this->relations as $key => $value) {
+            $query .= ", $key.*";
+        }
+
+        $query .= " FROM $this->table";
+
+        // JOINS
+        foreach ($this->relations as $key => $value) {
+            $query .= " LEFT JOIN $key ON $this->table.$value = $key.$value";
+        }
+
+        // ADDING THE CONDITIONS TO THE QUERY
+        $query .= " WHERE ";
+        foreach($keys as $key) {
+            $query .= $this->table.".".$key . " = :" . $key . " && ";
+        }
+        foreach($keys_not as $key) {
+            $query .= $this->table.".".$key . " != :" . $key . " && ";
+        }
+        $query = trim($query, " && ");
+        $query .= " ORDER BY $this->table_id $this->order_type LIMIT 1 OFFSET $this->offset";
+
+        // MERGE NOT CLAUSES DATA TO $data
+        $data = array_merge($data, $data_not);
+
+        /** THIS LINE SHOWS THE COMPLETE QUERY (UNCOMMENT TO SHOW ON PAGE THE COMPLETE QUERY) */
+        //console_log($query);
+
+        $data = array_merge($data, $data_not);
+        $result = $this->query($query, $data);
+        if($result) {
+            return $result[0];
         }
 
         return false;

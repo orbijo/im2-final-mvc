@@ -193,7 +193,7 @@
 
 						<div class="col-12">
 							<label for="address" class="form-label">Address</label>
-							<input type="text" class="form-control" id="address" placeholder="<?= $worker->location_id ?>" value="<?= $worker->location_id ?>" required>
+							<input type="text" class="form-control" id="address" placeholder="<?= $worker->street_address ?>" value="<?= $worker->street_address ?>" required>
 							<div class="invalid-feedback">
 								Please enter an address.
 							</div>
@@ -205,7 +205,11 @@
 								<option value="">Choose...</option>
 								<?php if($countries): ?>
 									<?php foreach ($countries as $key => $value): ?>
-										<option value="<?=$value->country_id?>"><?=$value->country_name?></option>
+										<?php if($worker->country_id == $value->country_id): ?>
+											<option selected value="<?=$value->country_id?>"><?=$value->country_name?></option>
+										<?php else: ?>
+											<option value="<?=$value->country_id?>"><?=$value->country_name?></option>
+										<?php endif; ?>
 									<?php endforeach;?>
 								<?php endif;?>
 							</select>
@@ -215,7 +219,7 @@
 						</div>
 
 						<div class="col-md-4">
-							<label for="state" class="form-label">State</label>
+							<label for="state" class="form-label">State/Province</label>
 							<select class="form-select" id="state" required>
 								<option value="">Choose...</option>
 								<option>California</option>
@@ -227,7 +231,7 @@
 
 						<div class="col-md-3">
 							<label for="zip" class="form-label">Zip</label>
-							<input type="text" class="form-control" id="zip" placeholder="" required>
+							<input type="text" class="form-control" id="zip" placeholder="<?=$worker->postal_code?>" value="<?=$worker->postal_code?>" required>
 							<div class="invalid-feedback">
 								Zip code required.
 							</div>
