@@ -93,13 +93,13 @@
 				<div class="position-sticky pt-3 sidebar-sticky">
 					<ul class="nav flex-column">
 						<li class="nav-item">
-							<a class="nav-link" href="home">
+							<a class="nav-link" href="<?=ROOT?>/home">
 								<span data-feather="home" class="align-text-bottom"></span>
 								Dashboard
 							</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="projects">
+							<a class="nav-link" href="<?=ROOT?>/projects">
 								<span data-feather="layers" class="align-text-bottom"></span>
 								Projects
 							</a>
@@ -124,7 +124,7 @@
 					</h6>
 					<ul class="nav flex-column mb-2">
 						<li class="nav-item">
-							<a class="nav-link active" aria-current="page" href="#">
+							<a class="nav-link active" aria-current="page" href="<?=ROOT?>/workers">
 								<span data-feather="users" class="align-text-bottom"></span>
 								Workers
 							</a>

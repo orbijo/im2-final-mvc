@@ -200,7 +200,7 @@
 								<td class="text-truncate">
 									<?= $value->street_address . ", " . $value->city ?>
 								</td>
-								<td><a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><span data-feather="edit"
+								<td><a href="<?=ROOT?>/workers/show/<?=$value->worker_id?>"><span data-feather="edit"
 											class="align-text-bottom"></span></a></td>
 							</tr>
 							<?php endforeach; ?>
@@ -209,99 +209,6 @@
 					</table>
 				</div>
 			</main>
-		</div>
-	</div>
-
-	<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content rounded-4 shadow">
-				<div class="modal-header p-5 pb-4 border-bottom-0">
-					<h1 class="modal-title fs-5">Edit</h1>
-					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-				</div>
-
-				<div class="modal-body p-5 pt-0">
-					<form class="needs-validation" novalidate>
-						<div class="row g-3">
-							<div class="col-sm-6">
-								<label for="firstName" class="form-label">First name</label>
-								<input type="text" class="form-control" id="firstName" placeholder="" value="" required>
-								<div class="invalid-feedback">
-									Valid first name is required.
-								</div>
-							</div>
-
-							<div class="col-sm-6">
-								<label for="lastName" class="form-label">Last name</label>
-								<input type="text" class="form-control" id="lastName" placeholder="" value="" required>
-								<div class="invalid-feedback">
-									Valid last name is required.
-								</div>
-							</div>
-
-							<div class="col-12">
-								<label for="email" class="form-label">Email <span class="text-muted">(Optional)</span></label>
-								<input type="email" class="form-control" id="email" placeholder="you@example.com">
-								<div class="invalid-feedback">
-									Please enter a valid email address.
-								</div>
-							</div>
-
-							<div class="col-12">
-								<label for="username" class="form-label">Phone Number</label>
-								<div class="input-group has-validation">
-									<input type="text" class="form-control" id="phonenumber" placeholder="Phone Number" required>
-									<div class="invalid-feedback">
-										Phone number is required.
-									</div>
-								</div>
-							</div>
-
-							<div class="col-12">
-								<label for="address" class="form-label">Address</label>
-								<input type="text" class="form-control" id="address" placeholder="1234 Main St" required>
-								<div class="invalid-feedback">
-									Please enter an address.
-								</div>
-							</div>
-
-							<div class="col-md-5">
-								<label for="country" class="form-label">Country</label>
-								<select class="form-select" id="country" required>
-									<option value="">Choose...</option>
-									<option>United States</option>
-								</select>
-								<div class="invalid-feedback">
-									Please select a valid country.
-								</div>
-							</div>
-
-							<div class="col-md-4">
-								<label for="state" class="form-label">State</label>
-								<select class="form-select" id="state" required>
-									<option value="">Choose...</option>
-									<option>California</option>
-								</select>
-								<div class="invalid-feedback">
-									Please provide a valid state.
-								</div>
-							</div>
-
-							<div class="col-md-3">
-								<label for="zip" class="form-label">Zip</label>
-								<input type="text" class="form-control" id="zip" placeholder="" required>
-								<div class="invalid-feedback">
-									Zip code required.
-								</div>
-							</div>
-						</div>
-
-						<hr class="my-4">
-
-						<button class="w-100 btn btn-primary btn-lg" type="submit">Continue to checkout</button>
-					</form>
-				</div>
-			</div>
 		</div>
 	</div>
 

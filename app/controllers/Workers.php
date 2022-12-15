@@ -12,7 +12,7 @@ class Workers {
         $this->view('workers/index', $data);
     }
 
-    public function show($id) {
+    public function show($id = 0) {
         $worker = new Worker;
         $countries = new Country;
         $data['worker'] = $worker->first(['worker_id'=>$id]);
