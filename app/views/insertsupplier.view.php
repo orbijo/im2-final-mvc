@@ -156,7 +156,7 @@ mysqli_select_db($con, 'construction_db');
       
       <div class="table-responsive">
           <tbody>
- <form method ="post" action = "supplieredit"> 
+ <form method ="post" action = "insertsupplier"> 
           <div class="input-group">
             <span class="input-group-text">First Name</span>
             <input type="text" aria-label="First name" name ="first_name" class="form-control">

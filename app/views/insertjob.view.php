@@ -4,11 +4,7 @@
 $con = mysqli_connect("localhost", "root", "") or die("Cannot connect");
 mysqli_select_db($con, 'construction_db');
 
-//$query = SELECT * FROM `jobs` where `job_id` = 2;
-//$result = mysql_query($query);
 ?>
-
-
 
 
 <!doctype html>
@@ -95,64 +91,63 @@ mysqli_select_db($con, 'construction_db');
 <div class="container-fluid">
   <div class="row">
   <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
-				<div class="position-sticky pt-3 sidebar-sticky">
-					<ul class="nav flex-column">
-						<li class="nav-item">
-							<a class="nav-link" href="<?=ROOT?>/home">
-								<span data-feather="home" class="align-text-bottom"></span>
-								Dashboard
-							</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="<?=ROOT?>/projects">
-								<span data-feather="layers" class="align-text-bottom"></span>
-								Projects
-							</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="<?=ROOT?>/clients">
-								<span data-feather="users" class="align-text-bottom"></span>
-								Clients
-							</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="<?=ROOT?>/suppliers">
-								<span data-feather="package" class="align-text-bottom"></span>
-								Suppliers
-							</a>
-						</li>
-					</ul>
+      <div class="position-sticky pt-3 sidebar-sticky">
+        <ul class="nav flex-column">
+          <li class="nav-item">
+            <a class="nav-link" href="home">
+              <span data-feather="home" class="align-text-bottom"></span>
+              Dashboard
+            </a>
+          </li>
+          <li class="nav-item">
+          <a class="nav-link" href="<?=ROOT?>/projects/index.view">
+              <span data-feather="layers" class="align-text-bottom"></span>
+              Projects
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="<?=ROOT?>/clients/index.view">
+              <span data-feather="users" class="align-text-bottom"></span>
+              Clients
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="<?=ROOT?>/suppliers/index.view">
+              <span data-feather="package" class="align-text-bottom"></span>
+              Suppliers
+            </a>
+          </li>
+        </ul>
 
-					<h6
-						class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted text-uppercase">
-						<span>Manage</span>
-					</h6>
-					<ul class="nav flex-column mb-2">
-						<li class="nav-item">
-							<a class="nav-link active" aria-current="page" href="<?=ROOT?>/workers">
-								<span data-feather="users" class="align-text-bottom"></span>
-								Workers
-							</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="<?=ROOT?>/jobs">
-								<span data-feather="clipboard" class="align-text-bottom"></span>
-								Job Positions
-							</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="<?=ROOT?>/locations">
-								<span data-feather="map-pin" class="align-text-bottom"></span>
-								Locations
-							</a>
-						</li>
-					</ul>
-				</div>
-			</nav>
+        <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted text-uppercase">
+          <span>Manage</span>
+        </h6>
+        <ul class="nav flex-column mb-2">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="<?=ROOT?>/workers/index.view">
+              <span data-feather="users" class="align-text-bottom"></span>
+              Workers
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="<?=ROOT?>/jobs/index.view">
+              <span data-feather="clipboard" class="align-text-bottom"></span>
+              Job Positions
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="<?=ROOT?>/locations/index.view">
+              <span data-feather="map-pin" class="align-text-bottom"></span>
+              Locations
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
 
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2">Project Insert</h1>
+        <h1 class="h2">Supplier Insert</h1>
         <div class="btn-toolbar mb-2 mb-md-0">
         
         </div>
@@ -161,45 +156,25 @@ mysqli_select_db($con, 'construction_db');
       
       <div class="table-responsive">
           <tbody>
- <form method ="post" action = "insertproject"> 
+ <form method ="post" action = "insertjob"> 
           <div class="input-group">
-            <span class="input-group-text">Project Name</span>
-            <input type="text" aria-label="First name" name ="project_name" class="form-control">
+            <span class="input-group-text">First Name</span>
+            <input type="text" aria-label="First name" name ="first_name" class="form-control">
           </div>
           <br>
           <div class="input-group">
-            <span class="input-group-text">Start Date</span>
-            <input type="text" aria-label="First name" name ="start_date" class="form-control">
+            <span class="input-group-text">Last Name</span>
+            <input type="text" aria-label="First name" name ="last_name" class="form-control">
           </div>
           <br>
           <div class="input-group">
-            <span class="input-group-text">End Date</span>
-            <input type="text" aria-label="First name" name ="end_date" class="form-control">
+            <span class="input-group-text">Email</span>
+            <input type="text" aria-label="First name" name ="email" class="form-control">
           </div>
           <br>
           <div class="input-group">
-          <span class="input-group-text">Foreman</span>
-            <select class="form-select" aria-label="Default select example">
-              <option selected>Open this select menu</option>
-              <option value="1">One</option>
-              <option value="2">Two</option>
-              <option value="3">Three</option>
-            </select>
-          </div>
-          <br>
-          <div class="input-group">
-          <span class="input-group-text">Client</span>
-            <select class="form-select" aria-label="Default select example" name ="client_id">
-              <option selected>Open this select menu</option>
-              <option value="1">One</option>
-              <option value="2">Two</option>
-              <option value="3">Three</option>
-            </select>
-          </div>
-          <br>
-          <div class="input-group">
-            <span class="input-group-text">Budget</span>
-            <input type="text" aria-label="First name" name ="budget" class="form-control">
+            <span class="input-group-text">Phone Number</span>
+            <input type="text" aria-label="First name" name ="phone_number" class="form-control">
           </div>
           <br>
           <div class="input-group">
@@ -220,12 +195,50 @@ mysqli_select_db($con, 'construction_db');
           <button type="submit" name="insert" class="btn btn-outline-success" value = "submit">Insert</button>
           <a href="workers"><button type="button" class="btn btn-outline-danger">Cancel</button></a>
           </form>  
+
+          <?php 
+          
+          if(isset($_POST['insert']))
+          {	 
+            $first_name = $_POST['first_name'];
+            $last_name = $_POST['last_name'];
+            $email = $_POST['email'];
+            $phone_number = $_POST['phone_number']; 
+            $location_id = $_POST['location_id'];
+            $sql = "INSERT INTO `suppliers` (first_name,last_name,email,phone_number,location_id)
+            VALUES ('$first_name','$last_name','$email','$phone_number','$location_id')";
+            $query_run = mysqli_query($con, $sql);
+            
+            if ($query_run) {
+              echo "New record created successfully !";
+            } else {
+              echo "Error: " . $sql . "
+          " . mysqli_error($con);
+            }
+            mysqli_close($con);
+          }
+          
+          
+          ?>
+
+
+
+
+
+
+
+
+
+
+
         </tbody>
         </table>
       </div>
     </main>
   </div>
 </div>
+    
+  
 <script src="<?=ROOT?>/assets/js/bootstrap.bundle.min.js"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script>
