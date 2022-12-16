@@ -202,7 +202,7 @@
 								</td>
 								<td><a href="<?=ROOT?>/workers/show/<?=$value->worker_id?>"><span data-feather="edit"
 											class="align-text-bottom"></span></a></td>
-								<td><a href="workedit"><span data-feather="plus-square" class="align-text-bottom"></span></a></td>
+								<td><a href="insertworkers"><span data-feather="plus-square" class="align-text-bottom"></span></a></td>
 							</tr>
 							<?php endforeach; ?>
 							<?php endif; ?>
