@@ -93,13 +93,13 @@
 				<div class="position-sticky pt-3 sidebar-sticky">
 					<ul class="nav flex-column">
 						<li class="nav-item">
-							<a class="nav-link" href="<?=ROOT?>/home">
+							<a class="nav-link" href="<?= ROOT ?>/home">
 								<span data-feather="home" class="align-text-bottom"></span>
 								Dashboard
 							</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="<?=ROOT?>/projects">
+							<a class="nav-link" href="<?= ROOT ?>/projects">
 								<span data-feather="layers" class="align-text-bottom"></span>
 								Projects
 							</a>
@@ -124,7 +124,7 @@
 					</h6>
 					<ul class="nav flex-column mb-2">
 						<li class="nav-item">
-							<a class="nav-link active" aria-current="page" href="<?=ROOT?>/workers">
+							<a class="nav-link active" aria-current="page" href="<?= ROOT ?>/workers">
 								<span data-feather="users" class="align-text-bottom"></span>
 								Workers
 							</a>
@@ -165,7 +165,8 @@
 
 						<div class="col-sm-6">
 							<label for="lastName" class="form-label">Last name</label>
-							<input type="text" class="form-control" id="lastName" placeholder="<?= $worker->last_name ?>" value="<?= $worker->last_name ?>" required>
+							<input type="text" class="form-control" id="lastName"
+								placeholder="<?= $worker->last_name ?>" value="<?= $worker->last_name ?>" required>
 							<div class="invalid-feedback">
 								Valid last name is required.
 							</div>
@@ -174,7 +175,8 @@
 						<div class="col-12">
 							<label for="email" class="form-label">Email <span
 									class="text-muted">(Optional)</span></label>
-							<input type="email" class="form-control" id="email" placeholder="<?= $worker->email ?>" value="<?= $worker->email ?>">
+							<input type="email" class="form-control" id="email" placeholder="<?= $worker->email ?>"
+								value="<?= $worker->email ?>">
 							<div class="invalid-feedback">
 								Please enter a valid email address.
 							</div>
@@ -183,7 +185,8 @@
 						<div class="col-12">
 							<label for="username" class="form-label">Phone Number</label>
 							<div class="input-group has-validation">
-								<input type="text" class="form-control" id="phonenumber" placeholder="<?= $worker->phone_number ?>" value="<?= $worker->phone_number ?>"
+								<input type="text" class="form-control" id="phonenumber"
+									placeholder="<?= $worker->phone_number ?>" value="<?= $worker->phone_number ?>"
 									required>
 								<div class="invalid-feedback">
 									Phone number is required.
@@ -193,7 +196,8 @@
 
 						<div class="col-12">
 							<label for="address" class="form-label">Address</label>
-							<input type="text" class="form-control" id="address" placeholder="<?= $worker->address ?>" value="<?= $worker->address ?>" required>
+							<input type="text" class="form-control" id="address" placeholder="<?= $worker->address ?>"
+								value="<?= $worker->address ?>" required>
 							<div class="invalid-feedback">
 								Please enter an address.
 							</div>
@@ -203,15 +207,19 @@
 							<label for="country" class="form-label">Country</label>
 							<select class="form-select" id="country" required>
 								<option value="">Choose...</option>
-								<?php if($countries): ?>
-									<?php foreach ($countries as $key => $value): ?>
-										<?php if($worker->country_id == $value->country_id): ?>
-											<option selected value="<?=$value->country_id?>"><?=$value->country_name?></option>
-										<?php else: ?>
-											<option value="<?=$value->country_id?>"><?=$value->country_name?></option>
-										<?php endif; ?>
-									<?php endforeach;?>
-								<?php endif;?>
+								<?php if ($countries): ?>
+								<?php foreach ($countries as $key => $value): ?>
+								<?php if ($worker->country_id == $value->country_id): ?>
+								<option selected value="<?= $value->country_id ?>">
+									<?= $value->country_name ?>
+								</option>
+								<?php else: ?>
+								<option value="<?= $value->country_id ?>">
+									<?= $value->country_name ?>
+								</option>
+								<?php endif; ?>
+								<?php endforeach; ?>
+								<?php endif; ?>
 							</select>
 							<div class="invalid-feedback">
 								Please select a valid country.
@@ -219,10 +227,20 @@
 						</div>
 
 						<div class="col-md-4">
-							<label for="state" class="form-label">State/Province</label>
-							<select class="form-select" id="state" required>
+							<label for="state_province" class="form-label">State/Province</label>
+							<select class="form-select" id="state_province" required>
 								<option value="">Choose...</option>
-								<option>California</option>
+								<?php foreach ($state_provinces as $key => $value): ?>
+									<?php if ($value->state_province == $worker->state_province): ?>
+									<option selected value="<?= $value->state_province ?>">
+										<?= $value->state_province ?>
+									</option>
+									<?php elseif($value->country_id == $worker->country_id): ?>
+									<option value="<?= $value->state_province ?>">
+										<?= $value->state_province ?>
+									</option>
+									<?php endif; ?>
+								<?php endforeach; ?>
 							</select>
 							<div class="invalid-feedback">
 								Please provide a valid state.
@@ -230,8 +248,9 @@
 						</div>
 
 						<div class="col-md-3">
-							<label for="zip" class="form-label">Zip</label>
-							<input type="text" class="form-control" id="zip" placeholder="<?=$worker->postal_code?>" value="<?=$worker->postal_code?>" required>
+							<label for="postal_code" class="form-label">Zip</label>
+							<input type="text" class="form-control" id="<?= $worker->postal_code ?>"
+								placeholder="<?= $worker->postal_code ?>" value="<?= $worker->postal_code ?>" required>
 							<div class="invalid-feedback">
 								Zip code required.
 							</div>
@@ -240,7 +259,7 @@
 
 					<hr class="my-4">
 
-					<button class="w-100 btn btn-primary btn-lg" type="submit">Continue to checkout</button>
+					<button class="w-100 btn btn-primary btn-lg" type="submit">Edit</button>
 				</form>
 				<?php else: ?>
 				<div class="d-flex justify-content-center">
@@ -264,6 +283,25 @@
 		crossorigin="anonymous"></script>
 	<script src="<?= ROOT ?>/assets/js/dashboard.js"></script>
 	<script src="<?= ROOT ?>/assets/js/form-validation.js"></script>
+	<script src="<?= ROOT ?>/assets/js/jquery-3.6.2.min.js"></script>
+	<script src="<?= ROOT ?>/assets/js/forms.js"></script>
+	<script>
+		var data = <?php echo json_encode($state_provinces); ?>;
+	</script>
+	<script>
+		$(document).ready(function () {
+
+			$('#country').change(function () {
+				$("#state_province").html('<option value="">Choose...</option>');
+				var val = $(this).val();
+				data.forEach(element => {
+					if (val == element.country_id) {
+						$("#state_province").append('<option value="' + element.state_province + '">' + element.state_province + '</option>');
+					}
+				});
+			});
+		})
+	</script>
 </body>
 
 </html>

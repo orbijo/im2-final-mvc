@@ -18,8 +18,9 @@ class Workers {
 
         $data['countries'] = $countries->findAll();
         $data['worker'] = $worker->firstWithRelations(['worker_id'=>$id]);
-
+        $data['state_provinces'] = $countries->state_provinces();
         console_log($data);
+
         $this->view('workers/show', $data);
     }
 }

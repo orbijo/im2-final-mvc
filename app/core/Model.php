@@ -8,7 +8,7 @@ Trait Model {
     
     protected $limit = 10;
     protected $offset = 0;
-    protected $order_type = 'DESC';
+    protected $order_type = 'ASC';
 
     public function findAll() {
         
