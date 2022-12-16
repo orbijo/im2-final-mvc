@@ -196,14 +196,18 @@ mysqli_select_db($con, 'construction_db');
             <input type="text" aria-label="First name" name ="salary" class="form-control">
           </div>
           <br>
-    
           <div class="input-group">
-            <span class="input-group-text">Location</span>
+            <span class="input-group-text">Address</span>
+            <input type="text" aria-label="First name" name ="address" class="form-control">
+          </div>
+          <br>
+          <div class="input-group">
+            <span class="input-group-text">City</span>
             <select class="form-select" aria-label="Default select example" name = "location_id">
               <option selected>Open this select menu</option>
-              <option value="1">Cebu City, Cebu</option>
-              <option value="2">Consolacion, Cebu</option>
-              <option value="3">Buckingham Palace,Westminister, London</option>
+              <option value="1">Cebu City</option>
+              <option value="2">Consolacion</option>
+              <option value="3">Westminister SW1A 1AA</option>
               <option value="4">Abbey Road,Westminister, London</option>
               <option value="5">Sydney, New South Wales</option>
             </select>
@@ -227,9 +231,10 @@ mysqli_select_db($con, 'construction_db');
               $hire_date = $_POST['hire_date']; 
             $job_id = $_POST['job_id'];
               $salary = $_POST['salary'];
+              $address = $_POST['address'];
               $location_id = $_POST['location_id'];
-            $sql = "INSERT INTO `workers` (first_name,last_name,email,phone_number,hire_date,job_id,salary,location_id)
-            VALUES ('$first_name','$last_name','$email','$phone_number','$hire_date','$job_id','$salary','$location_id')";
+            $sql = "INSERT INTO `workers` (first_name,last_name,email,phone_number,hire_date,job_id,salary,address,location_id)
+            VALUES ('$first_name','$last_name','$email','$phone_number','$hire_date','$job_id','$salary','$address','$location_id')";
             $query_run = mysqli_query($con, $sql);
             
             if ($query_run) {
