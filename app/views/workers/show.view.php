@@ -193,7 +193,7 @@
 
 						<div class="col-12">
 							<label for="address" class="form-label">Address</label>
-							<input type="text" class="form-control" id="address" placeholder="<?= $worker->street_address ?>" value="<?= $worker->street_address ?>" required>
+							<input type="text" class="form-control" id="address" placeholder="<?= $worker->address ?>" value="<?= $worker->address ?>" required>
 							<div class="invalid-feedback">
 								Please enter an address.
 							</div>

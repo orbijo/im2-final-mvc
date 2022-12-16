@@ -198,7 +198,7 @@
 									<?= $value->salary ?>
 								</td>
 								<td class="text-truncate">
-									<?= $value->street_address . ", " . $value->city ?>
+									<?= $value->address . ", " . $value->city ?>
 								</td>
 								<td><a href="<?=ROOT?>/workers/show/<?=$value->worker_id?>"><span data-feather="edit"
 											class="align-text-bottom"></span></a></td>

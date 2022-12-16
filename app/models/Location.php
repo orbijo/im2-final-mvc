@@ -10,7 +10,6 @@ class Location {
     protected $table_id = 'location_id';
 
     protected $allowedColumns = [
-        'street_address',
         'postal_code',
         'city',
         'state_province',

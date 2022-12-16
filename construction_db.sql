@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 12, 2022 at 08:17 AM
+-- Generation Time: Dec 16, 2022 at 01:26 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -31,8 +31,9 @@ CREATE TABLE `clients` (
   `client_id` int(11) NOT NULL,
   `first_name` varchar(255) NOT NULL,
   `last_name` varchar(255) NOT NULL,
-  `email` varchar(254) NOT NULL,
+  `email` varchar(254) NOT NULL DEFAULT '',
   `phone_number` varchar(50) NOT NULL,
+  `address` varchar(255) NOT NULL DEFAULT '',
   `location_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -40,9 +41,9 @@ CREATE TABLE `clients` (
 -- Dumping data for table `clients`
 --
 
-INSERT INTO `clients` (`client_id`, `first_name`, `last_name`, `email`, `phone_number`, `location_id`) VALUES
-(1, 'Za', 'Queen', 'herroyalhighness@royalty.gov.uk', '0000', 3),
-(2, 'Bisdak', 'Kayngdako', 'cebunumbawan@cebu.gov.ph', '09223344556', 1);
+INSERT INTO `clients` (`client_id`, `first_name`, `last_name`, `email`, `phone_number`, `address`, `location_id`) VALUES
+(1, 'Za', 'Queen', 'herroyalhighness@royalty.gov.uk', '0000', 'Buckingham Palace', 3),
+(2, 'Bisdak', 'Kayngdako', 'cebunumbawan@cebu.gov.ph', '09223344556', 'Somewhere in Cebu', 1);
 
 -- --------------------------------------------------------
 
@@ -101,7 +102,6 @@ INSERT INTO `jobs` (`job_id`, `job_title`, `min_salary`, `max_salary`) VALUES
 
 CREATE TABLE `locations` (
   `location_id` int(11) NOT NULL,
-  `street_address` varchar(255) NOT NULL,
   `postal_code` varchar(10) NOT NULL,
   `city` varchar(255) NOT NULL DEFAULT '',
   `state_province` varchar(255) NOT NULL DEFAULT '',
@@ -112,12 +112,13 @@ CREATE TABLE `locations` (
 -- Dumping data for table `locations`
 --
 
-INSERT INTO `locations` (`location_id`, `street_address`, `postal_code`, `city`, `state_province`, `country_id`) VALUES
-(1, 'X01 Sugbo St.', '6000', 'Cebu City', 'Cebu', 2),
-(2, 'XX9 Cebu North Rd. Poblacion Oriental', '6001', 'Consolacion', 'Cebu', 2),
-(3, 'Buckingham Palace', 'SW1A 1AA', 'Westminster', 'London', 4),
-(4, '3 Abbey Road, St', 'NW8', 'Westminster', 'London', 4),
-(5, 'P. Sherman, 42 Wallaby Way', '2000', 'Sydney', 'New South Wales', 8);
+INSERT INTO `locations` (`location_id`, `postal_code`, `city`, `state_province`, `country_id`) VALUES
+(1, '6000', 'Cebu City', 'Cebu', 2),
+(2, '6001', 'Consolacion', 'Cebu', 2),
+(3, 'SW1A 1AA', 'Westminster', 'London', 4),
+(4, 'NW8', 'Westminster', 'London', 4),
+(5, '2000', 'Sydney', 'New South Wales', 8),
+(6, '1000', 'Manila', 'Metro Manila', 2);
 
 -- --------------------------------------------------------
 
@@ -199,8 +200,9 @@ CREATE TABLE `suppliers` (
   `supplier_id` int(11) NOT NULL,
   `first_name` varchar(255) NOT NULL,
   `last_name` varchar(255) NOT NULL,
-  `email` varchar(254) NOT NULL,
+  `email` varchar(254) NOT NULL DEFAULT '',
   `phone_number` varchar(50) NOT NULL,
+  `address` varchar(255) NOT NULL DEFAULT '',
   `location_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -214,8 +216,9 @@ CREATE TABLE `workers` (
   `worker_id` int(11) NOT NULL,
   `first_name` varchar(255) NOT NULL,
   `last_name` varchar(255) NOT NULL,
-  `email` varchar(254) NOT NULL,
+  `email` varchar(254) NOT NULL DEFAULT '',
   `phone_number` varchar(50) NOT NULL,
+  `address` varchar(255) NOT NULL DEFAULT '',
   `hire_date` date NOT NULL,
   `job_id` int(11) DEFAULT NULL,
   `salary` decimal(19,4) NOT NULL,
@@ -227,11 +230,11 @@ CREATE TABLE `workers` (
 -- Dumping data for table `workers`
 --
 
-INSERT INTO `workers` (`worker_id`, `first_name`, `last_name`, `email`, `phone_number`, `hire_date`, `job_id`, `salary`, `foreman_id`, `location_id`) VALUES
-(2, 'John', 'Johnson', 'test@example.com', 'X012-345-6789', '2022-12-07', 1, '12000.0000', 3, 5),
-(3, 'Bob', 'Builder', 'Bob_D_Builder@builderbob.build', '876-BUILD', '2022-12-06', 2, '25000.0000', NULL, 4),
-(5, 'Davy', 'Jones', 'sample2@insert.com', '1234-78', '2022-12-11', 1, '10000.0000', 3, 5),
-(6, 'Steph', 'Jobless', 'no@jobs.com', '000-0000', '2022-12-12', NULL, '0.0000', NULL, 1);
+INSERT INTO `workers` (`worker_id`, `first_name`, `last_name`, `email`, `phone_number`, `address`, `hire_date`, `job_id`, `salary`, `foreman_id`, `location_id`) VALUES
+(2, 'John', 'Johnson', 'test@example.com', 'X012-345-6789', 'Sydney Opera House', '2022-12-07', 1, '12000.0000', 3, 5),
+(3, 'Bob', 'Builder', 'Bob_D_Builder@builderbob.build', '876-BUILD', 'Builder Base St.', '2022-12-06', 2, '25000.0000', NULL, 4),
+(5, 'Davy', 'Jones', 'sample2@insert.com', '1234-78', 'P. Sherman, 42 Wallaby Way', '2022-12-11', 1, '10000.0000', 3, 5),
+(6, 'Steph', 'Jobless', 'no@jobs.com', '000-0000', 'Homeless St.', '2022-12-12', NULL, '0.0000', NULL, 1);
 
 --
 -- Indexes for dumped tables
@@ -332,7 +335,7 @@ ALTER TABLE `jobs`
 -- AUTO_INCREMENT for table `locations`
 --
 ALTER TABLE `locations`
-  MODIFY `location_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `location_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `projects`
