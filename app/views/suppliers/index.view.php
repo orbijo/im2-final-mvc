@@ -72,7 +72,7 @@
 <body>
 
 	<header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
-		<a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6" href="#">Tugunon Construction</a>
+		<a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6" href="#">AOPS Construction</a>
 		<button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse"
 			data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
@@ -92,7 +92,7 @@
 				<div class="position-sticky pt-3 sidebar-sticky">
 					<ul class="nav flex-column">
 						<li class="nav-item">
-							<a class="nav-link" href="<?=ROOT?>/home">
+							<a class="nav-link" href="home">
 								<span data-feather="home" class="align-text-bottom"></span>
 								Dashboard
 							</a>
@@ -110,7 +110,7 @@
 							</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="<?=ROOT?>/suppliers">
+							<a class="nav-link active" href="<?=ROOT?>/suppliers">
 								<span data-feather="package" class="align-text-bottom"></span>
 								Suppliers
 							</a>
@@ -123,7 +123,7 @@
 					</h6>
 					<ul class="nav flex-column mb-2">
 						<li class="nav-item">
-							<a class="nav-link active" aria-current="page" href="<?=ROOT?>/workers">
+							<a class="nav-link" aria-current="page" href="<?=ROOT?>/workers">
 								<span data-feather="users" class="align-text-bottom"></span>
 								Workers
 							</a>
@@ -147,7 +147,7 @@
 			<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
 				<div
 					class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-					<h1 class="h2">Workers</h1>
+					<h1 class="h2">Jobs</h1>
 					<div class="btn-toolbar mb-2 mb-md-0">
 						<button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
 							<span data-feather="calendar" class="align-text-bottom"></span>
@@ -165,19 +165,16 @@
 								<th class="th-sm" scope="col">Name</th>
 								<th class="th-sm" scope="col">Email</th>
 								<th class="th-sm" scope="col">Phone Number</th>
-								<th class="th-sm" scope="col">Job</th>
-								<th class="th-sm" scope="col">Hire Date</th>
-								<th class="th-sm" scope="col">Salary</th>
-								<th class="th-sm" scope="col">Location</th>
+								<th class="th-sm" scope="col">Address</th>
 								<th class="th-sm" scope="col">Actions</th>
 							</tr>
 						</thead>
 						<tbody>
-							<?php if ($workers): ?>
-							<?php foreach ($workers as $key => $value): ?>
+							<?php if ($clients): ?>
+							<?php foreach ($clients as $key => $value): ?>
 							<tr>
 								<td>
-									<?= $value->worker_id ?>
+									<?= $value->client_id ?>
 								</td>
 								<td>
 									<?= $value->first_name . ' ' . $value->last_name ?>
@@ -187,15 +184,6 @@
 								</td>
 								<td>
 									<?= $value->phone_number ?>
-								</td>
-								<td>
-									<?= $value->job_title ?>
-								</td>
-								<td>
-									<?= date("F j, Y", strtotime($value->hire_date)) ?>
-								</td>
-								<td>
-									<?= $value->salary ?>
 								</td>
 								<td class="text-truncate">
 									<?= $value->address . ", " . $value->city ?>

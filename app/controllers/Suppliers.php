@@ -6,6 +6,6 @@ class Suppliers {
 
     public function index() {
 
-        $this->view('home');
+        $this->view('suppliers/index');
     }
 }

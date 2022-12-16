@@ -6,6 +6,6 @@ class Jobs {
 
     public function index() {
 
-        $this->view('home');
+        $this->view('jobs/index');
     }
 }

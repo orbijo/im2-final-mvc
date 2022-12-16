@@ -6,6 +6,6 @@ class Projects {
 
     public function index() {
 
-        $this->view('projects');
+        $this->view('projects/index');
     }
 }

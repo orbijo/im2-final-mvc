@@ -105,13 +105,13 @@
 							</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="#">
+							<a class="nav-link" href="<?=ROOT?>/clients">
 								<span data-feather="users" class="align-text-bottom"></span>
-								Customers
+								Clients
 							</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="#">
+							<a class="nav-link" href="<?=ROOT?>/suppliers">
 								<span data-feather="package" class="align-text-bottom"></span>
 								Suppliers
 							</a>
@@ -130,13 +130,13 @@
 							</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="#">
+							<a class="nav-link" href="<?=ROOT?>/jobs">
 								<span data-feather="clipboard" class="align-text-bottom"></span>
 								Job Positions
 							</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="#">
+							<a class="nav-link" href="<?=ROOT?>/locations">
 								<span data-feather="map-pin" class="align-text-bottom"></span>
 								Locations
 							</a>

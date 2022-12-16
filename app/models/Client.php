@@ -18,6 +18,7 @@ class Client {
         'location_id',
     ];
 
-    
-    
+    protected $relations = [
+        'locations' => 'location_id',
+    ];
 }

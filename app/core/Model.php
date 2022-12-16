@@ -169,6 +169,34 @@ Trait Model {
         return false;
     }
 
+    public function allWithRelations() {
+        // INITIALIZE QUERY STATEMENT
+        $query = "SELECT $this->table.$this->table_id";
+        foreach ($this->allowedColumns as $key) {
+            if(!in_array($key, $this->relations)){
+                $query .= ", $this->table.$key";
+            }
+        }
+        foreach ($this->relations as $key => $value) {
+            $query .= ", $key.*";
+        }
+
+        $query .= " FROM $this->table";
+
+        // JOINS
+        foreach ($this->relations as $key => $value) {
+            $query .= " LEFT JOIN $key ON $this->table.$value = $key.$value";
+        }
+
+        $query .= " ORDER BY $this->table_id $this->order_type LIMIT $this->limit OFFSET $this->offset";
+
+        /** THIS LINE SHOWS THE COMPLETE QUERY (UNCOMMENT TO SHOW ON PAGE THE COMPLETE QUERY) */
+        // console_log($query);
+
+        // GET AND RETURN THE RESULT BY USING query() function inherited from Trait Database.php
+        return $this->query($query);
+    }
+
     public function whereWithRelations($data, $data_not = []) {
         /**
          * General Function to GET WHERE: conidtion 

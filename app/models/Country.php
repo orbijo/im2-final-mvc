@@ -20,13 +20,7 @@ class Country {
         GROUP BY locations.state_province";
 
         $result = $this->query($query);
-        // $data = [];
-        // foreach ($results as $result) {
-        //     $data[$result->country_name]->array_push($result->state_province);
-        // }
-        // console_log($data);
 
-        // return $this->query($query);
         return $result;
     }
 

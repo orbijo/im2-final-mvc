@@ -6,6 +6,6 @@ class Locations {
 
     public function index() {
 
-        $this->view('home');
+        $this->view('locations/index');
     }
 }
