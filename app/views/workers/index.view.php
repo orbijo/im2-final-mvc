@@ -149,10 +149,10 @@
 					class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
 					<h1 class="h2">Workers</h1>
 					<div class="btn-toolbar mb-2 mb-md-0">
-						<button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
-							<span data-feather="calendar" class="align-text-bottom"></span>
-							Sort something...
-						</button>
+                        <a href="insertworkers" class="btn btn-sm btn-outline-primary" role="button">
+                            <span data-feather="plus" class="align-text-bottom"></span>
+							Add New Worker
+                        </a>
 					</div>
 				</div>
 
@@ -202,7 +202,7 @@
 								</td>
 								<td><a href="<?=ROOT?>/workers/show/<?=$value->worker_id?>"><span data-feather="edit"
 											class="align-text-bottom"></span></a></td>
-								<td><a href="insertworkers"><span data-feather="plus-square" class="align-text-bottom"></span></a></td>
+								
 							</tr>
 							<?php endforeach; ?>
 							<?php endif; ?>
