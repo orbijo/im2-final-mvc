@@ -152,11 +152,12 @@
 				</div>
 
 				<?php if ($worker): ?>
-				<form class="needs-validation px-5" novalidate>
+				<form action="<?=ROOT?>/workers/update" method="post" class="needs-validation px-5" novalidate>
+					<input type="hidden" name="worker_id" value="<?= $worker->worker_id ?>" />
 					<div class="row g-3">
 						<div class="col-sm-6">
-							<label for="firstName" class="form-label">First name</label>
-							<input type="text" class="form-control" id="firstName"
+							<label for="first_name" class="form-label">First name</label>
+							<input name="first_name" type="text" class="form-control" id="first_name"
 								placeholder="<?= $worker->first_name ?>" value="<?= $worker->first_name ?>" required>
 							<div class="invalid-feedback">
 								Valid first name is required.
@@ -164,8 +165,8 @@
 						</div>
 
 						<div class="col-sm-6">
-							<label for="lastName" class="form-label">Last name</label>
-							<input type="text" class="form-control" id="lastName"
+							<label for="last_name" class="form-label">Last name</label>
+							<input name="last_name" type="text" class="form-control" id="last_name"
 								placeholder="<?= $worker->last_name ?>" value="<?= $worker->last_name ?>" required>
 							<div class="invalid-feedback">
 								Valid last name is required.
@@ -173,19 +174,18 @@
 						</div>
 
 						<div class="col-12">
-							<label for="email" class="form-label">Email <span
-									class="text-muted">(Optional)</span></label>
-							<input type="email" class="form-control" id="email" placeholder="<?= $worker->email ?>"
-								value="<?= $worker->email ?>">
+							<label for="email" class="form-label">Email</label>
+							<input name="email" type="email" class="form-control" id="email" placeholder="<?= $worker->email ?>"
+								value="<?= $worker->email ?>" required>
 							<div class="invalid-feedback">
 								Please enter a valid email address.
 							</div>
 						</div>
 
 						<div class="col-12">
-							<label for="username" class="form-label">Phone Number</label>
+							<label for="phone_number" class="form-label">Phone Number</label>
 							<div class="input-group has-validation">
-								<input type="text" class="form-control" id="phonenumber"
+								<input name="phone_number" type="text" class="form-control" id="phone_number"
 									placeholder="<?= $worker->phone_number ?>" value="<?= $worker->phone_number ?>"
 									required>
 								<div class="invalid-feedback">
@@ -194,9 +194,56 @@
 							</div>
 						</div>
 
+						<div class="col-4">
+							<label for="job_id" class="form-label">Job</label>
+							<select name="job_id" class="form-select" id="job_id" required>
+
+								<?php if($worker->job_id == 2): ?>
+									<option value="1">Construction Worker</option>
+									<option selected value="2">Foreman</option>
+								<?php else: ?>
+									<option selected value="1">Construction Worker</option>
+									<option value="2">Foreman</option>
+								<?php endif; ?>
+								
+							</select>
+							<div class="invalid-feedback">
+								Select a job
+							</div>
+						</div>
+
+						<div class="col-4">
+							<label for="salary" class="form-label">Salary</label>
+							<input name="salary" type="text" class="form-control" id="salary" placeholder="<?= $worker->salary ?>"
+								value="<?= $worker->salary ?>" required>
+							<div class="invalid-feedback">
+								Please enter a valid amount
+							</div>
+						</div>
+						<?php if($worker->job_id!=2): ?>
+						<div class="col-4">
+							<label for="foreman" class="form-label">Foreman</label>
+							<select name="foreman_id" class="form-select" id="foreman" required>
+								
+								
+									<?php foreach ($foremen as $foreman): ?>
+										<?php if($worker->foreman_id == $foreman->worker_id):?>
+											<option selected value="<?=$foreman->worker_id?>"><?=$foreman->first_name?> <?=$foreman->last_name?></option>
+										<?php else: ?>
+											<option value="<?=$foreman->worker_id?>"><?=$foreman->first_name?> <?=$foreman->last_name?></option>
+										<?php endif; ?>
+									<?php endforeach; ?>
+								
+							</select>
+							<div class="invalid-feedback">
+								Please enter an address.
+							</div>
+						</div>
+						<?php endif ?>
+
 						<div class="col-12">
 							<label for="address" class="form-label">Address</label>
-							<input type="text" class="form-control" id="address" placeholder="<?= $worker->address ?>"
+							<input name="address" type="text" class="form-control" id="address" placeholder="<?= $worker->address ?>"
 								value="<?= $worker->address ?>" required>
 							<div class="invalid-feedback">
 								Please enter an address.
@@ -205,7 +252,7 @@
 
 						<div class="col-md-5">
 							<label for="country" class="form-label">Country</label>
-							<select class="form-select" id="country" required>
+							<select name="country_id" class="form-select" id="country" required>
 								<option value="">Choose...</option>
 								<?php if ($countries): ?>
 								<?php foreach ($countries as $key => $value): ?>
@@ -228,18 +275,18 @@
 
 						<div class="col-md-4">
 							<label for="state_province" class="form-label">State/Province</label>
-							<select class="form-select" id="state_province" required>
+							<select name="state_province" class="form-select" id="state_province" required>
 								<option value="">Choose...</option>
 								<?php foreach ($state_provinces as $key => $value): ?>
-									<?php if ($value->state_province == $worker->state_province): ?>
-									<option selected value="<?= $value->state_province ?>">
-										<?= $value->state_province ?>
-									</option>
-									<?php elseif($value->country_id == $worker->country_id): ?>
-									<option value="<?= $value->state_province ?>">
-										<?= $value->state_province ?>
-									</option>
-									<?php endif; ?>
+								<?php if ($value->state_province == $worker->state_province): ?>
+								<option selected value="<?= $value->state_province ?>">
+									<?= $value->state_province ?>
+								</option>
+								<?php elseif ($value->country_id == $worker->country_id): ?>
+								<option value="<?= $value->state_province ?>">
+									<?= $value->state_province ?>
+								</option>
+								<?php endif; ?>
 								<?php endforeach; ?>
 							</select>
 							<div class="invalid-feedback">
@@ -249,7 +296,7 @@
 
 						<div class="col-md-3">
 							<label for="postal_code" class="form-label">Zip</label>
-							<input type="text" class="form-control" id="<?= $worker->postal_code ?>"
+							<input name="postal_code" type="text" class="form-control" id="postal_code"
 								placeholder="<?= $worker->postal_code ?>" value="<?= $worker->postal_code ?>" required>
 							<div class="invalid-feedback">
 								Zip code required.
@@ -259,7 +306,7 @@
 
 					<hr class="my-4">
 
-					<button class="w-100 btn btn-primary btn-lg" type="submit">Edit</button>
+					<button class="w-100 btn btn-primary btn-lg" type="submit" value="submit" name="submit">Edit</button>
 				</form>
 				<?php else: ?>
 				<div class="d-flex justify-content-center">

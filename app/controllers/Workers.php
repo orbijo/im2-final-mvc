@@ -18,9 +18,23 @@ class Workers {
 
         $data['countries'] = $countries->findAll();
         $data['worker'] = $worker->firstWithRelations(['worker_id'=>$id]);
+        $data['foremen'] = $worker->where(['job_id'=>2]);
         $data['state_provinces'] = $countries->state_provinces();
         console_log($data);
 
         $this->view('workers/show', $data);
+    }
+
+    public function create() {
+        console_log($_POST['submit']);
+    }
+
+    public function update() {
+
+        $worker = new Worker;
+
+        $worker->update($_POST['worker_id'], $_POST, 'worker_id');
+
+        redirect('workers');
     }
 }

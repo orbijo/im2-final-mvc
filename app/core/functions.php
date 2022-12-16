@@ -9,6 +9,13 @@ function esc($str) {
     return htmlspecialchars($str);
 }
 
+function redirect($path)
+{
+    console_log("Location: " . ROOT . "/" . $path);
+	header("Location: " . ROOT."/".$path);
+	die;
+}
+
 function console_log($output, $with_script_tags = true) {
     $js_code = 'console.log(' . json_encode($output, JSON_HEX_TAG) . 
 ');';
