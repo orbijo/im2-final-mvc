@@ -27,8 +27,8 @@ class Workers {
         $this->view('workers/show', $data);
     }
 
-    public function create() {
-        console_log($_POST['submit']);
+    public function add() {
+        $this->view('workers/add');
     }
 
     public function update() {
