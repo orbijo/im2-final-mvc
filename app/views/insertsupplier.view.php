@@ -6,6 +6,7 @@ mysqli_select_db($con, 'construction_db');
 
 ?>
 
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -99,19 +100,19 @@ mysqli_select_db($con, 'construction_db');
             </a>
           </li>
           <li class="nav-item">
-          <a class="nav-link" href="<?=ROOT?>/projects/index.view">
+          <a class="nav-link" href="projects">
               <span data-feather="layers" class="align-text-bottom"></span>
               Projects
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="<?=ROOT?>/clients/index.view">
+            <a class="nav-link" href="#">
               <span data-feather="users" class="align-text-bottom"></span>
-              Clients
+              Customers
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="<?=ROOT?>/suppliers/index.view">
+            <a class="nav-link active" href="supplieredit">
               <span data-feather="package" class="align-text-bottom"></span>
               Suppliers
             </a>
@@ -123,19 +124,19 @@ mysqli_select_db($con, 'construction_db');
         </h6>
         <ul class="nav flex-column mb-2">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="<?=ROOT?>/workers/index.view">
+            <a class="nav-link" aria-current="page" href="workers">
               <span data-feather="users" class="align-text-bottom"></span>
               Workers
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="<?=ROOT?>/jobs/index.view">
+            <a class="nav-link" href="#">
               <span data-feather="clipboard" class="align-text-bottom"></span>
               Job Positions
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="<?=ROOT?>/locations/index.view">
+            <a class="nav-link" href="#">
               <span data-feather="map-pin" class="align-text-bottom"></span>
               Locations
             </a>
@@ -146,7 +147,7 @@ mysqli_select_db($con, 'construction_db');
 
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2">Workers Insert</h1>
+        <h1 class="h2">Supplier Insert</h1>
         <div class="btn-toolbar mb-2 mb-md-0">
         
         </div>
@@ -155,12 +156,15 @@ mysqli_select_db($con, 'construction_db');
       
       <div class="table-responsive">
           <tbody>
-            <form method ="post" action = "insertworkers">
+ <form method ="post" action = "supplieredit"> 
           <div class="input-group">
             <span class="input-group-text">First Name</span>
             <input type="text" aria-label="First name" name ="first_name" class="form-control">
+          </div>
+          <br>
+          <div class="input-group">
             <span class="input-group-text">Last Name</span>
-            <input type="text" aria-label="Last name" name ="last_name" class="form-control">
+            <input type="text" aria-label="First name" name ="last_name" class="form-control">
           </div>
           <br>
           <div class="input-group">
@@ -174,56 +178,24 @@ mysqli_select_db($con, 'construction_db');
           </div>
           <br>
           <div class="input-group">
-            <span class="input-group-text">Hire Date</span>
-            <input type="text" aria-label="First name" name ="hire_date" class="form-control" placeholder="example: YYYY/MM/DD">
-          </div>
-          <br>
-          
-          
-          <div class="input-group">
-            <span class="input-group-text">Job</span>
-            <select class="form-select" aria-label="Default select example" name = "job_id">
-              <option selected>Open this select menu</option>
-              <option value="1">Construction Worker</option>
-              <option value="2">Foreman</option>
-            </select>
-          </div>
-
-        
-          <br>
-          <div class="input-group">
-            <span class="input-group-text">Salary</span>
-            <input type="text" aria-label="First name" name ="salary" class="form-control">
-          </div>
-          <br>
-          <div class="input-group">
-            <span class="input-group-text">Address</span>
-            <input type="text" aria-label="First name" name ="address" class="form-control">
-          </div>
-          <br>
-          <div class="input-group">
-            <span class="input-group-text">City</span>
+            <span class="input-group-text">Location</span>
             <select class="form-select" aria-label="Default select example" name = "location_id">
               <option selected>Open this select menu</option>
-              <option value="1">Cebu City</option>
-              <option value="2">Consolacion</option>
-              <option value="3">Westminister SW1A 1AA</option>
+              <option value="1">Cebu City, Cebu</option>
+              <option value="2">Consolacion, Cebu</option>
+              <option value="3">Buckingham Palace,Westminister, London</option>
               <option value="4">Abbey Road,Westminister, London</option>
               <option value="5">Sydney, New South Wales</option>
             </select>
           </div>
           <br>
-        
+          
           &emsp;&emsp; &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-          &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-          &emsp;&emsp;&emsp;&emsp;
-          
-          
-        
+          &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
           <button type="submit" name="insert" class="btn btn-outline-success" value = "submit">Insert</button>
           <a href="workers"><button type="button" class="btn btn-outline-danger">Cancel</button></a>
-          </form> 
-          
+          </form>  
+
           <?php 
           
           if(isset($_POST['insert']))
@@ -231,14 +203,10 @@ mysqli_select_db($con, 'construction_db');
             $first_name = $_POST['first_name'];
             $last_name = $_POST['last_name'];
             $email = $_POST['email'];
-              $phone_number = $_POST['phone_number']; 
-              $hire_date = $_POST['hire_date']; 
-            $job_id = $_POST['job_id'];
-              $salary = $_POST['salary'];
-              $address = $_POST['address'];
-              $location_id = $_POST['location_id'];
-            $sql = "INSERT INTO `workers` (first_name,last_name,email,phone_number,hire_date,job_id,salary,address,location_id)
-            VALUES ('$first_name','$last_name','$email','$phone_number','$hire_date','$job_id','$salary','$address','$location_id')";
+            $phone_number = $_POST['phone_number']; 
+            $location_id = $_POST['location_id'];
+            $sql = "INSERT INTO `suppliers` (first_name,last_name,email,phone_number,location_id)
+            VALUES ('$first_name','$last_name','$email','$phone_number','$location_id')";
             $query_run = mysqli_query($con, $sql);
             
             if ($query_run) {
@@ -262,7 +230,7 @@ mysqli_select_db($con, 'construction_db');
 
 
 
-          
+
         </tbody>
         </table>
       </div>
@@ -270,7 +238,7 @@ mysqli_select_db($con, 'construction_db');
   </div>
 </div>
     
-   
+  
 <script src="<?=ROOT?>/assets/js/bootstrap.bundle.min.js"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script>

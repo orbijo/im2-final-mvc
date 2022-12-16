@@ -88,11 +88,11 @@
 
 	<div class="container-fluid">
 		<div class="row">
-			<nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+		<nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
 				<div class="position-sticky pt-3 sidebar-sticky">
 					<ul class="nav flex-column">
 						<li class="nav-item">
-							<a class="nav-link" href="home">
+							<a class="nav-link" href="<?=ROOT?>/home">
 								<span data-feather="home" class="align-text-bottom"></span>
 								Dashboard
 							</a>
@@ -110,7 +110,7 @@
 							</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link active" href="<?=ROOT?>/suppliers">
+							<a class="nav-link" href="<?=ROOT?>/suppliers">
 								<span data-feather="package" class="align-text-bottom"></span>
 								Suppliers
 							</a>
@@ -123,7 +123,7 @@
 					</h6>
 					<ul class="nav flex-column mb-2">
 						<li class="nav-item">
-							<a class="nav-link" aria-current="page" href="<?=ROOT?>/workers">
+							<a class="nav-link active" aria-current="page" href="<?=ROOT?>/workers">
 								<span data-feather="users" class="align-text-bottom"></span>
 								Workers
 							</a>
@@ -147,12 +147,12 @@
 			<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
 				<div
 					class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-					<h1 class="h2">Jobs</h1>
+					<h1 class="h2">Supplier</h1>
 					<div class="btn-toolbar mb-2 mb-md-0">
-						<button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
-							<span data-feather="calendar" class="align-text-bottom"></span>
-							Sort something...
-						</button>
+                        <a href="insertsupplier" class="btn btn-sm btn-outline-primary" role="button">
+                            <span data-feather="plus" class="align-text-bottom"></span>
+							Add New Supplier
+                        </a>
 					</div>
 				</div>
 

@@ -142,8 +142,13 @@
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 class="h2">Projects</h1>
         
+        <div class="btn-toolbar mb-2 mb-md-0">
+                        <a href="insertproject" class="btn btn-sm btn-outline-primary" role="button">
+                            <span data-feather="plus" class="align-text-bottom"></span>
+							Add New Project
+                        </a>
+					</div>
       </div>
-
       
       <div class="table-responsive">
         <table class="table table-striped table-sm">
