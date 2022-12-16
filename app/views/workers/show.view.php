@@ -295,9 +295,21 @@
 						</div>
 
 						<div class="col-md-3">
-							<label for="postal_code" class="form-label">Zip</label>
-							<input name="postal_code" type="text" class="form-control" id="postal_code"
-								placeholder="<?= $worker->postal_code ?>" value="<?= $worker->postal_code ?>" required>
+							<label for="location_id" class="form-label">City/Town</label>
+							<select name="location_id" class="form-select" id="citytown" required>
+								<option value="">Choose...</option>
+								<?php foreach ($locations as $key => $value): ?>
+								<?php if ($value->location_id == $worker->location_id): ?>
+								<option selected value="<?= $value->location_id ?>">
+									<?= $value->city.' ('.$value->postal_code.')' ?>
+								</option>
+								<?php elseif ($value->state_province == $worker->state_province): ?>
+								<option value="<?= $value->state_province ?>">
+									<?= $value->city.' ('.$value->postal_code.')' ?>
+								</option>
+								<?php endif; ?>
+								<?php endforeach; ?>
+							</select>
 							<div class="invalid-feedback">
 								Zip code required.
 							</div>
@@ -334,6 +346,7 @@
 	<script src="<?= ROOT ?>/assets/js/forms.js"></script>
 	<script>
 		var data = <?php echo json_encode($state_provinces); ?>;
+		var area = <?php echo json_encode($locations); ?>;
 	</script>
 	<script>
 		$(document).ready(function () {
@@ -347,6 +360,17 @@
 					}
 				});
 			});
+
+			$('#state_province').change(function () {
+				$("#citytown").html('<option value="">Choose...</option>');
+				var val = $(this).val();
+				area.forEach(element => {
+					if (val == element.state_province) {
+						$("#citytown").append('<option value="' + element.location_id + '">' + element.city + '</option>');
+					}
+				});
+			});
+
 		})
 	</script>
 </body>
