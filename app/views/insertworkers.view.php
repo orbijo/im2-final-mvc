@@ -156,7 +156,7 @@ mysqli_select_db($con, 'construction_db');
       
       <div class="table-responsive">
           <tbody>
-            <form method ="post" action = "<?= ROOT ?>/InserWorkers/insert">
+            <form method ="post" action = "<?= ROOT ?>/InsertWorkers/insert">
           <div class="input-group">
             <span class="input-group-text">First Name</span>
             <input type="text" aria-label="First name" name ="first_name" class="form-control">
@@ -279,7 +279,7 @@ mysqli_select_db($con, 'construction_db');
 <script src="<?= ROOT ?>/assets/js/dashboard.js"></script>
     <script src="<?= ROOT ?>/assets/js/form-validation.js"></script>
     <script src="<?= ROOT ?>/assets/js/jquery-3.6.2.min.js"></script>
-<script>
+    <script>
         var countries = <?php echo json_encode($countries); ?>;
         var locations = <?php echo json_encode($locations); ?>;
         var state_provinces = <?php echo json_encode($state_provinces); ?>;
@@ -311,5 +311,6 @@ mysqli_select_db($con, 'construction_db');
             });
 
         })
+    </script>
 </body>
 </html>
