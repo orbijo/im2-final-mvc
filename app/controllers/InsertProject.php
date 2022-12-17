@@ -13,4 +13,12 @@ class InsertProject {
         $data['clients'] = $clients->findall();
         $this->view('insertproject',$data);
     }
+
+    public function insert() {
+        $insertproject = new Projects;
+
+        $insertproject->insert($_POST);
+
+        redirect('home');
+    }
 }

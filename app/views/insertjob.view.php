@@ -159,35 +159,18 @@ mysqli_select_db($con, 'construction_db');
           <tbody>
  <form method ="post" action = "insertjob"> 
           <div class="input-group">
-            <span class="input-group-text">First Name</span>
-            <input type="text" aria-label="First name" name ="first_name" class="form-control">
+            <span class="input-group-text">Job Name</span>
+            <input type="text" aria-label="First name" name ="job_title" class="form-control">
           </div>
           <br>
           <div class="input-group">
-            <span class="input-group-text">Last Name</span>
-            <input type="text" aria-label="First name" name ="last_name" class="form-control">
+            <span class="input-group-text">Minimum Salary</span>
+            <input type="text" aria-label="First name" name ="min_salary" class="form-control">
           </div>
           <br>
           <div class="input-group">
-            <span class="input-group-text">Email</span>
-            <input type="text" aria-label="First name" name ="email" class="form-control">
-          </div>
-          <br>
-          <div class="input-group">
-            <span class="input-group-text">Phone Number</span>
-            <input type="text" aria-label="First name" name ="phone_number" class="form-control">
-          </div>
-          <br>
-          <div class="input-group">
-            <span class="input-group-text">Location</span>
-            <select class="form-select" aria-label="Default select example" name = "location_id">
-              <option selected>Open this select menu</option>
-              <option value="1">Cebu City, Cebu</option>
-              <option value="2">Consolacion, Cebu</option>
-              <option value="3">Buckingham Palace,Westminister, London</option>
-              <option value="4">Abbey Road,Westminister, London</option>
-              <option value="5">Sydney, New South Wales</option>
-            </select>
+            <span class="input-group-text">Maximum Salary</span>
+            <input type="text" aria-label="First name" name ="max_salary" class="form-control">
           </div>
           <br>
           
@@ -201,13 +184,11 @@ mysqli_select_db($con, 'construction_db');
           
           if(isset($_POST['insert']))
           {	 
-            $first_name = $_POST['first_name'];
-            $last_name = $_POST['last_name'];
-            $email = $_POST['email'];
-            $phone_number = $_POST['phone_number']; 
-            $location_id = $_POST['location_id'];
-            $sql = "INSERT INTO `suppliers` (first_name,last_name,email,phone_number,location_id)
-            VALUES ('$first_name','$last_name','$email','$phone_number','$location_id')";
+            $job_title = $_POST['job_title'];
+            $min_salary = $_POST['min_salary'];
+            $max_salary = $_POST['max_salary'];
+            $sql = "INSERT INTO `jobs` (job_title,min_salary,max_salary)
+            VALUES ('$job_title','$min_salary','$max_salary')";
             $query_run = mysqli_query($con, $sql);
             
             if ($query_run) {

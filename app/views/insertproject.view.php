@@ -179,7 +179,7 @@ mysqli_select_db($con, 'construction_db');
           <br>
           <div class="input-group">
           <span class="input-group-text">Foreman</span>
-            <select class="form-select" aria-label="Default select example">
+            <select class="form-select" aria-label="Default select example" name ="foreman_id">
               <option selected>Open this select menu</option>
               <?php if ($foremans): ?>
                                 <?php foreach ($foremans as $key => $value): ?>
@@ -229,6 +229,33 @@ mysqli_select_db($con, 'construction_db');
           <a href="workers"><button type="button" class="btn btn-outline-danger">Cancel</button></a>
           </form>  
         </tbody>
+
+
+        <?php 
+          
+          if(isset($_POST['insert']))
+          {	 
+            $project_name = $_POST['project_name'];
+            $start_date = $_POST['start_date'];
+            $end_date = $_POST['end_date'];
+            $foreman_id = $_POST['foreman_id']; 
+            $client_id = $_POST['client_id']; 
+            $budget = $_POST['budget']; 
+            $sql = "INSERT INTO `projects` (project_name,start_date,end_date,foreman_id,client_id,budget)
+            VALUES ('$project_name','$start_date','$end_date','$foreman_id','$client_id','$budget')";
+            $query_run = mysqli_query($con, $sql);
+            
+            if ($query_run) {
+              echo "New record created successfully !";
+            } else {
+              echo "Error: " . $sql . "
+          " . mysqli_error($con);
+            }
+            mysqli_close($con);
+          }
+          
+          
+          ?>
         </table>
       </div>
     </main>

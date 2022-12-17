@@ -1,10 +1,3 @@
-<?php
- 
-  // CONNECTS TO DB USING CONSTANTS DEFINED AT config.php
-$con = mysqli_connect("localhost", "root", "") or die("Cannot connect");
-mysqli_select_db($con, 'construction_db');
-
-?>
 
 
 <!doctype html>
@@ -148,7 +141,7 @@ mysqli_select_db($con, 'construction_db');
 
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2">Supplier Insert</h1>
+        <h1 class="h2">Add Worker to the project</h1>
         <div class="btn-toolbar mb-2 mb-md-0">
         
         </div>
@@ -158,29 +151,20 @@ mysqli_select_db($con, 'construction_db');
       <div class="table-responsive">
           <tbody>
  <form method ="post" action = "insertsupplier"> 
-          <div class="input-group">
-            <span class="input-group-text">First Name</span>
-            <input type="text" aria-label="First name" name ="first_name" class="form-control">
+ <div class="input-group">
+          <span class="input-group-text">Worker</span>
+            <select class="form-select" aria-label="Default select example">
+              <option selected>Open this select menu</option>
+              
+            </select>
           </div>
           <br>
           <div class="input-group">
-            <span class="input-group-text">Last Name</span>
-            <input type="text" aria-label="First name" name ="last_name" class="form-control">
-          </div>
-          <br>
-          <div class="input-group">
-            <span class="input-group-text">Email</span>
-            <input type="text" aria-label="First name" name ="email" class="form-control">
-          </div>
-          <br>
-          <div class="input-group">
-            <span class="input-group-text">Phone Number</span>
-            <input type="text" aria-label="First name" name ="phone_number" class="form-control">
-          </div>
-          <br>
-          <div class="input-group">
-            <span class="input-group-text">Address</span>
-            <input type="text" aria-label="First name" name ="address" class="form-control">
+          <span class="input-group-text">Project</span>
+            <select class="form-select" aria-label="Default select example">
+              <option selected>Open this select menu</option>
+              
+            </select>
           </div>
           <br>
           
