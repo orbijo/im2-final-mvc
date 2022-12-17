@@ -98,7 +98,7 @@ mysqli_select_db($con, 'construction_db');
 				<div class="position-sticky pt-3 sidebar-sticky">
 					<ul class="nav flex-column">
 						<li class="nav-item">
-							<a class="nav-link" href="<?=ROOT?>/home">
+							<a class="nav-link" href="home">
 								<span data-feather="home" class="align-text-bottom"></span>
 								Dashboard
 							</a>
@@ -129,13 +129,13 @@ mysqli_select_db($con, 'construction_db');
 					</h6>
 					<ul class="nav flex-column mb-2">
 						<li class="nav-item">
-							<a class="nav-link active" aria-current="page" href="<?=ROOT?>/workers">
+							<a class="nav-link" aria-current="page" href="<?=ROOT?>/workers">
 								<span data-feather="users" class="align-text-bottom"></span>
 								Workers
 							</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="<?=ROOT?>/jobs">
+							<a class="nav-link active" href="<?=ROOT?>/jobs">
 								<span data-feather="clipboard" class="align-text-bottom"></span>
 								Job Positions
 							</a>

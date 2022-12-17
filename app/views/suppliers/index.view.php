@@ -110,7 +110,7 @@
 							</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="<?=ROOT?>/suppliers">
+							<a class="nav-link active" href="<?=ROOT?>/suppliers">
 								<span data-feather="package" class="align-text-bottom"></span>
 								Suppliers
 							</a>
@@ -123,7 +123,7 @@
 					</h6>
 					<ul class="nav flex-column mb-2">
 						<li class="nav-item">
-							<a class="nav-link active" aria-current="page" href="<?=ROOT?>/workers">
+							<a class="nav-link" aria-current="page" href="<?=ROOT?>/workers">
 								<span data-feather="users" class="align-text-bottom"></span>
 								Workers
 							</a>

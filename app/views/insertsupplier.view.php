@@ -90,60 +90,61 @@ mysqli_select_db($con, 'construction_db');
 </header>
 <div class="container-fluid">
   <div class="row">
-    <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
-      <div class="position-sticky pt-3 sidebar-sticky">
-        <ul class="nav flex-column">
-          <li class="nav-item">
-            <a class="nav-link" href="home">
-              <span data-feather="home" class="align-text-bottom"></span>
-              Dashboard
-            </a>
-          </li>
-          <li class="nav-item">
-          <a class="nav-link" href="projects">
-              <span data-feather="layers" class="align-text-bottom"></span>
-              Projects
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              <span data-feather="users" class="align-text-bottom"></span>
-              Customers
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link active" href="supplieredit">
-              <span data-feather="package" class="align-text-bottom"></span>
-              Suppliers
-            </a>
-          </li>
-        </ul>
+  <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+				<div class="position-sticky pt-3 sidebar-sticky">
+					<ul class="nav flex-column">
+						<li class="nav-item">
+							<a class="nav-link" href="home">
+								<span data-feather="home" class="align-text-bottom"></span>
+								Dashboard
+							</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="<?=ROOT?>/projects">
+								<span data-feather="layers" class="align-text-bottom"></span>
+								Projects
+							</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="<?=ROOT?>/clients">
+								<span data-feather="users" class="align-text-bottom"></span>
+								Clients
+							</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="<?=ROOT?>/suppliers">
+								<span data-feather="package" class="align-text-bottom"></span>
+								Suppliers
+							</a>
+						</li>
+					</ul>
 
-        <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted text-uppercase">
-          <span>Manage</span>
-        </h6>
-        <ul class="nav flex-column mb-2">
-          <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="workers">
-              <span data-feather="users" class="align-text-bottom"></span>
-              Workers
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              <span data-feather="clipboard" class="align-text-bottom"></span>
-              Job Positions
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              <span data-feather="map-pin" class="align-text-bottom"></span>
-              Locations
-            </a>
-          </li>
-        </ul>
-      </div>
-    </nav>
+					<h6
+						class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted text-uppercase">
+						<span>Manage</span>
+					</h6>
+					<ul class="nav flex-column mb-2">
+						<li class="nav-item">
+							<a class="nav-link" aria-current="page" href="<?=ROOT?>/workers">
+								<span data-feather="users" class="align-text-bottom"></span>
+								Workers
+							</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link active" href="<?=ROOT?>/jobs">
+								<span data-feather="clipboard" class="align-text-bottom"></span>
+								Job Positions
+							</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="<?=ROOT?>/locations">
+								<span data-feather="map-pin" class="align-text-bottom"></span>
+								Locations
+							</a>
+						</li>
+					</ul>
+				</div>
+			</nav>
 
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
