@@ -143,9 +143,19 @@
         <h1 class="h2">Projects</h1>
         
         <div class="btn-toolbar mb-2 mb-md-0">
+                        <a href="insertprojwork" class="btn btn-sm btn-outline-primary" role="button">
+                            <span data-feather="plus" class="align-text-bottom"></span>
+							                Add Workers
+                        </a>
+                        &emsp;
+                        <a href="" class="btn btn-sm btn-outline-primary" role="button">
+                            <span data-feather="plus" class="align-text-bottom"></span>
+							                Add Suppliers
+                        </a>
+                        &emsp;
                         <a href="insertproject" class="btn btn-sm btn-outline-primary" role="button">
                             <span data-feather="plus" class="align-text-bottom"></span>
-							Add New Project
+							                Add New Project
                         </a>
 					</div>
       </div>

@@ -4,11 +4,7 @@
 $con = mysqli_connect("localhost", "root", "") or die("Cannot connect");
 mysqli_select_db($con, 'construction_db');
 
-//$query = SELECT * FROM `jobs` where `job_id` = 2;
-//$result = mysql_query($query);
 ?>
-
-
 
 
 <!doctype html>
@@ -104,7 +100,7 @@ mysqli_select_db($con, 'construction_db');
 							</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link active" href="<?=ROOT?>/projects">
+							<a class="nav-link" href="<?=ROOT?>/projects">
 								<span data-feather="layers" class="align-text-bottom"></span>
 								Projects
 							</a>
@@ -116,7 +112,7 @@ mysqli_select_db($con, 'construction_db');
 							</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="<?=ROOT?>/suppliers">
+							<a class="nav-link active" href="<?=ROOT?>/suppliers">
 								<span data-feather="package" class="align-text-bottom"></span>
 								Suppliers
 							</a>
@@ -152,7 +148,7 @@ mysqli_select_db($con, 'construction_db');
 
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2">Add Project</h1>
+        <h1 class="h2">Supplier Insert</h1>
         <div class="btn-toolbar mb-2 mb-md-0">
         
         </div>
@@ -161,65 +157,30 @@ mysqli_select_db($con, 'construction_db');
       
       <div class="table-responsive">
           <tbody>
- <form method ="post" action = "insertproject"> 
+ <form method ="post" action = "insertsupplier"> 
           <div class="input-group">
-            <span class="input-group-text">Project Name</span>
-            <input type="text" aria-label="First name" name ="project_name" class="form-control">
+            <span class="input-group-text">First Name</span>
+            <input type="text" aria-label="First name" name ="first_name" class="form-control">
           </div>
           <br>
           <div class="input-group">
-            <span class="input-group-text">Start Date</span>
-            <input type="text" aria-label="First name" name ="start_date" class="form-control">
+            <span class="input-group-text">Last Name</span>
+            <input type="text" aria-label="First name" name ="last_name" class="form-control">
           </div>
           <br>
           <div class="input-group">
-            <span class="input-group-text">End Date</span>
-            <input type="text" aria-label="First name" name ="end_date" class="form-control">
+            <span class="input-group-text">Email</span>
+            <input type="text" aria-label="First name" name ="email" class="form-control">
           </div>
           <br>
           <div class="input-group">
-          <span class="input-group-text">Foreman</span>
-            <select class="form-select" aria-label="Default select example">
-              <option selected>Open this select menu</option>
-              <?php if ($foremans): ?>
-                                <?php foreach ($foremans as $key => $value): ?>
-                                <option value="<?= $value->worker_id?>">
-                                    <?= $value->first_name ?> <?= $value->last_name ?>
-                                </option>
-                                <?php endforeach; ?>
-                                <?php endif; ?>
-            </select>
+            <span class="input-group-text">Phone Number</span>
+            <input type="text" aria-label="First name" name ="phone_number" class="form-control">
           </div>
           <br>
           <div class="input-group">
-          <span class="input-group-text">Client</span>
-            <select class="form-select" aria-label="Default select example" name ="client_id">
-              <option selected>Open this select menu</option>
-                                <?php if ($clients): ?>
-                                <?php foreach ($clients as $key => $value): ?>
-                                <option value="<?= $value->client_id ?>">
-                                    <?= $value->first_name ?> <?= $value->last_name ?>
-                                </option>
-                                <?php endforeach; ?>
-                                <?php endif; ?>
-            </select>
-          </div>
-          <br>
-          <div class="input-group">
-            <span class="input-group-text">Budget</span>
-            <input type="text" aria-label="First name" name ="budget" class="form-control">
-          </div>
-          <br>
-          <div class="input-group">
-            <span class="input-group-text">Location</span>
-            <select class="form-select" aria-label="Default select example" name = "location_id">
-              <option selected>Open this select menu</option>
-              <option value="1">Cebu City, Cebu</option>
-              <option value="2">Consolacion, Cebu</option>
-              <option value="3">Buckingham Palace,Westminister, London</option>
-              <option value="4">Abbey Road,Westminister, London</option>
-              <option value="5">Sydney, New South Wales</option>
-            </select>
+            <span class="input-group-text">Address</span>
+            <input type="text" aria-label="First name" name ="address" class="form-control">
           </div>
           <br>
           
@@ -228,12 +189,16 @@ mysqli_select_db($con, 'construction_db');
           <button type="submit" name="insert" class="btn btn-outline-success" value = "submit">Insert</button>
           <a href="workers"><button type="button" class="btn btn-outline-danger">Cancel</button></a>
           </form>  
+
+
         </tbody>
         </table>
       </div>
     </main>
   </div>
 </div>
+    
+  
 <script src="<?=ROOT?>/assets/js/bootstrap.bundle.min.js"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script>
