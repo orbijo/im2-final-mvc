@@ -156,7 +156,7 @@ mysqli_select_db($con, 'construction_db');
       
       <div class="table-responsive">
           <tbody>
-            <form method ="post" action = "insertworkers">
+            <form method ="post" action = "<?= ROOT ?>/InserWorkers/insert">
           <div class="input-group">
             <span class="input-group-text">First Name</span>
             <input type="text" aria-label="First name" name ="first_name" class="form-control">
@@ -202,7 +202,7 @@ mysqli_select_db($con, 'construction_db');
             <input type="text" aria-label="First name" name ="address" class="form-control">
           </div>
           <br>
-          <div class="input-group">
+          <!--<div class="input-group">
             <span class="input-group-text">City</span>
             <select class="form-select" aria-label="Default select example" name = "location_id">
               <option selected>Open this select menu</option>
@@ -212,6 +212,40 @@ mysqli_select_db($con, 'construction_db');
               <option value="4">Abbey Road,Westminister, London</option>
               <option value="5">Sydney, New South Wales</option>
             </select>
+          </div> -->
+
+          <div class="input-group">
+            <span class="input-group-text">country</span>
+                            <select name="country_id" class="form-select" id="country" required>
+                                <option value="">Choose...</option>
+                                <?php if ($countries): ?>
+                                <?php foreach ($countries as $key => $value): ?>
+                                <option value="<?= $value->country_id ?>">
+                                    <?= $value->country_name ?>
+                                </option>
+                                <?php endforeach; ?>
+                                <?php endif; ?>
+                            </select>
+                            <div class="invalid-feedback">
+                                Please choose a valid country.
+                            </div>
+                      
+            <span class="input-group-text">State/Province</span>
+            <select name="state_province" class="form-select" id="state_province" required>
+                               <option value="">Choose... (Select a country first)</option>
+                            </select>
+                            <div class="invalid-feedback">
+                                Please choose a valid state.
+                            </div>
+                            
+              <span class="input-group-text">City/Town</span>
+                            <select name="location_id" class="form-select" id="citytown" required>
+                                <option value="">Choose... (Select a state or province first)</option>
+                            </select>
+                            <div class="invalid-feedback">
+                                City/Town Required
+                            </div>
+            
           </div>
           <br>
         
@@ -225,41 +259,6 @@ mysqli_select_db($con, 'construction_db');
           <a href="workers"><button type="button" class="btn btn-outline-danger">Cancel</button></a>
           </form> 
           
-          <?php 
-          
-          if(isset($_POST['insert']))
-          {	 
-            $first_name = $_POST['first_name'];
-            $last_name = $_POST['last_name'];
-            $email = $_POST['email'];
-              $phone_number = $_POST['phone_number']; 
-              $hire_date = $_POST['hire_date']; 
-            $job_id = $_POST['job_id'];
-              $salary = $_POST['salary'];
-              $address = $_POST['address'];
-              $location_id = $_POST['location_id'];
-            $sql = "INSERT INTO `workers` (first_name,last_name,email,phone_number,hire_date,job_id,salary,address,location_id)
-            VALUES ('$first_name','$last_name','$email','$phone_number','$hire_date','$job_id','$salary','$address','$location_id')";
-            $query_run = mysqli_query($con, $sql);
-            
-            if ($query_run) {
-              echo "New record created successfully !";
-            } else {
-              echo "Error: " . $sql . "
-          " . mysqli_error($con);
-            }
-            mysqli_close($con);
-          }
-          
-          
-          ?>
-
-
-
-
-
-
-
 
 
 
@@ -277,5 +276,40 @@ mysqli_select_db($con, 'construction_db');
 <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js" integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous"></script>
 <script src="<?=ROOT?>/assets/js/dashboard.js"></script>
+<script src="<?= ROOT ?>/assets/js/dashboard.js"></script>
+    <script src="<?= ROOT ?>/assets/js/form-validation.js"></script>
+    <script src="<?= ROOT ?>/assets/js/jquery-3.6.2.min.js"></script>
+<script>
+        var countries = <?php echo json_encode($countries); ?>;
+        var locations = <?php echo json_encode($locations); ?>;
+        var state_provinces = <?php echo json_encode($state_provinces); ?>;
+        console.log(countries);
+        console.log(locations);
+        console.log(state_provinces);
+    </script>
+    <script>
+        $(document).ready(function () {
+
+            $('#country').change(function () {
+                $("#state_province").html('<option value="">Choose...</option>');
+                var val = $(this).val();
+                state_provinces.forEach(element => {
+                    if (val == element.country_id) {
+                        $("#state_province").append('<option value="' + element.state_province + '">' + element.state_province + '</option>');
+                    }
+                });
+            });
+
+            $('#state_province').change(function () {
+                $("#citytown").html('<option value="">Choose...</option>');
+                var val = $(this).val();
+                locations.forEach(element => {
+                    if (val == element.state_province) {
+                        $("#citytown").append('<option value="' + element.location_id + '">' +element.city+ ' (' +element.postal_code+ ') </option>');
+                    }
+                });
+            });
+
+        })
 </body>
 </html>

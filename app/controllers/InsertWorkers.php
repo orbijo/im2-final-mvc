@@ -5,17 +5,28 @@ class InsertWorkers {
     use Controller;
 
     public function index() {
-
+       
         $this->view('insertworkers');
     }
 
+
     public function add() {
-        $location_id = new location_id;
-        $city = new city;
+        $locations = new Location;
+        $countries = new Country;
 
-        $data['location_id'] = $location_id->findAll();
-        $data['city'] = $city->findAll();
+        $data['locations'] = $locations->findAll();
+        $data['state_provinces'] = $countries->state_provinces();
+        $data['countries'] = $countries->findAll();
 
-        $this->view('workers/insertworkers',$data);
+        $this->view('insertworkers',$data);
     }
+
+    public function insert() {
+        $insertworker = new InsertWorkers;
+
+        $insertworker->insert($_POST);
+
+        redirect('workers');
+    }
+
 }

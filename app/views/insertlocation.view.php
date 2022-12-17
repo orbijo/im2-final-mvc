@@ -4,6 +4,13 @@
 $con = mysqli_connect("localhost", "root", "") or die("Cannot connect");
 mysqli_select_db($con, 'construction_db');
 
+$selectQuery = "SELECT * FROM `locations` ORDER BY `location_id` ASC";
+    $result = mysqli_query($connectQuery,$selectQuery);
+    if(mysqli_num_rows($result) > 0){
+  }else{
+        $msg = "No Record found";
+    }
+
 ?>
 
 
@@ -170,7 +177,19 @@ mysqli_select_db($con, 'construction_db');
           <br>
           <div class="input-group">
             <span class="input-group-text">State Province</span>
-            <input type="text" aria-label="First name" name ="state_province" class="form-control">
+            <select class="form-select" aria-label="Default select example" name = "state_province">
+              <option selected>Open this select menu</option>
+              <option value="<?php echo $location_id ?>">United States</option>
+              <option value="2">Philippines</option>
+              <option value="3">Japan</option>
+              <option value="4">United Kingdom</option>
+              <option value="5">Germany</option>
+              <option value="6">Saudi Arabia</option>
+              <option value="7">Brazil</option>
+              <option value="8">Australia</option>
+              <option value="9">Russia</option>
+              <option value="10">Egypt</option>
+            </select>
           </div>
           <br>
           <div class="input-group">
