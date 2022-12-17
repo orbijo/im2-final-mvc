@@ -179,15 +179,8 @@ mysqli_select_db($con, 'construction_db');
           </div>
           <br>
           <div class="input-group">
-            <span class="input-group-text">Location</span>
-            <select class="form-select" aria-label="Default select example" name = "location_id">
-              <option selected>Open this select menu</option>
-              <option value="1">Cebu City, Cebu</option>
-              <option value="2">Consolacion, Cebu</option>
-              <option value="3">Buckingham Palace,Westminister, London</option>
-              <option value="4">Abbey Road,Westminister, London</option>
-              <option value="5">Sydney, New South Wales</option>
-            </select>
+            <span class="input-group-text">Address</span>
+            <input type="text" aria-label="First name" name ="address" class="form-control">
           </div>
           <br>
           
@@ -205,9 +198,8 @@ mysqli_select_db($con, 'construction_db');
             $last_name = $_POST['last_name'];
             $email = $_POST['email'];
             $phone_number = $_POST['phone_number']; 
-            $location_id = $_POST['location_id'];
-            $sql = "INSERT INTO `suppliers` (first_name,last_name,email,phone_number,location_id)
-            VALUES ('$first_name','$last_name','$email','$phone_number','$location_id')";
+            $sql = "INSERT INTO `suppliers` (first_name,last_name,email,phone_number)
+            VALUES ('$first_name','$last_name','$email','$phone_number')";
             $query_run = mysqli_query($con, $sql);
             
             if ($query_run) {

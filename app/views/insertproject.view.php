@@ -191,9 +191,13 @@ mysqli_select_db($con, 'construction_db');
           <span class="input-group-text">Client</span>
             <select class="form-select" aria-label="Default select example" name ="client_id">
               <option selected>Open this select menu</option>
-              <option value="1">One</option>
-              <option value="2">Two</option>
-              <option value="3">Three</option>
+                                <?php if ($clients): ?>
+                                <?php foreach ($clients as $key => $value): ?>
+                                <option value="<?= $value->client_id ?>">
+                                    <?= $value->first_name ?> <?= $value->last_name ?>
+                                </option>
+                                <?php endforeach; ?>
+                                <?php endif; ?>
             </select>
           </div>
           <br>
