@@ -5,7 +5,8 @@ class InsertWorkers {
     use Controller;
 
     public function index() {
-       
+        $insertworker = new InsertWorkers;
+        $data['insertworkers'] = $insertworker->allWithRelations();
         $this->view('insertworkers');
     }
 
