@@ -112,7 +112,7 @@ mysqli_select_db($con, 'construction_db');
 							</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="<?=ROOT?>/suppliers">
+							<a class="nav-link active" href="<?=ROOT?>/suppliers">
 								<span data-feather="package" class="align-text-bottom"></span>
 								Suppliers
 							</a>
@@ -131,7 +131,7 @@ mysqli_select_db($con, 'construction_db');
 							</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link active" href="<?=ROOT?>/jobs">
+							<a class="nav-link" href="<?=ROOT?>/jobs">
 								<span data-feather="clipboard" class="align-text-bottom"></span>
 								Job Positions
 							</a>

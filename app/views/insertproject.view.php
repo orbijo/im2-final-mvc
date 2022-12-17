@@ -104,7 +104,7 @@ mysqli_select_db($con, 'construction_db');
 							</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="<?=ROOT?>/projects">
+							<a class="nav-link active" href="<?=ROOT?>/projects">
 								<span data-feather="layers" class="align-text-bottom"></span>
 								Projects
 							</a>
@@ -135,7 +135,7 @@ mysqli_select_db($con, 'construction_db');
 							</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link active" href="<?=ROOT?>/jobs">
+							<a class="nav-link" href="<?=ROOT?>/jobs">
 								<span data-feather="clipboard" class="align-text-bottom"></span>
 								Job Positions
 							</a>
@@ -152,7 +152,7 @@ mysqli_select_db($con, 'construction_db');
 
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2">Project Insert</h1>
+        <h1 class="h2">Add Project</h1>
         <div class="btn-toolbar mb-2 mb-md-0">
         
         </div>
@@ -181,9 +181,13 @@ mysqli_select_db($con, 'construction_db');
           <span class="input-group-text">Foreman</span>
             <select class="form-select" aria-label="Default select example">
               <option selected>Open this select menu</option>
-              <option value="1">One</option>
-              <option value="2">Two</option>
-              <option value="3">Three</option>
+              <?php if ($foremans): ?>
+                                <?php foreach ($foremans as $key => $value): ?>
+                                <option value="<?= $value->job_id?>">
+                                    <?= $value->first_name ?> <?= $value->last_name ?>
+                                </option>
+                                <?php endforeach; ?>
+                                <?php endif; ?>
             </select>
           </div>
           <br>
