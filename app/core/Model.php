@@ -1,175 +1,147 @@
-<?php
+<?php 
+
+namespace Model;
+
+defined('ROOTPATH') OR exit('Access Denied!');
 
 /**
- * Main Modal Trait
+ * Main Model trait
  */
-Trait Model {
-    use Database;
-    
-    protected $limit = 10;
-    protected $offset = 0;
-    protected $order_type = 'ASC';
+Trait Model
+{
+	use Database;
 
-    public function findAll() {
+	protected $limit 		= 25;
+	protected $offset 		= 0;
+	protected $order_type 	= "asc";
+	public $errors 		= [];
+
+	public function findAll() {
         
         $query = "SELECT * FROM $this->table ORDER BY $this->table_id $this->order_type LIMIT $this->limit OFFSET $this->offset";
 
         /** THIS LINE SHOWS THE COMPLETE QUERY (UNCOMMENT TO SHOW ON PAGE THE COMPLETE QUERY) */
         // echo $query;
 
-        // GET AND RETURN THE RESULT BY USING query() function inherited from Trait Database.php
         return $this->query($query);
     }
 
-    public function where($data, $data_not = []) {
-        /**
-         * General Function to GET WHERE: conidtion 
-         */
+	public function where($data, $data_not = [])
+	{
+		$keys = array_keys($data);
+		$keys_not = array_keys($data_not);
+		$query = "select * from $this->table where ";
 
-        // GET THE KEYS OF THE ARRAY AND STORE THEM INTO $keys
-        $keys = array_keys($data);
-        $keys_not = array_keys($data_not);
+		foreach ($keys as $key) {
+			$query .= $key . " = :". $key . " && ";
+		}
 
-        // INITIALIZE QUERY STATEMENT
-        $query = "SELECT * FROM $this->table WHERE ";
+		foreach ($keys_not as $key) {
+			$query .= $key . " != :". $key . " && ";
+		}
+		
+		$query = trim($query," && ");
 
-        // ADDING THE CONDITIONS TO THE QUERY
-        foreach($keys as $key) {
-            $query .= $key . " = :" . $key . " && ";
-        }
-        foreach($keys_not as $key) {
-            $query .= $key . " != :" . $key . " && ";
-        }
-        $query = trim($query, " && ");
-        $query .= " ORDER BY $this->table_id $this->order_type LIMIT $this->limit OFFSET $this->offset";
+		$query .= " ORDER BY $this->table_id $this->order_type LIMIT $this->limit OFFSET $this->offset";
+		$data = array_merge($data, $data_not);
 
-        // MERGE NOT CLAUSES DATA TO $data
-        $data = array_merge($data, $data_not);
+		return $this->query($query, $data);
+	}
 
-        /** THIS LINE SHOWS THE COMPLETE QUERY (UNCOMMENT TO SHOW ON PAGE THE COMPLETE QUERY) */
-        // echo $query;
+	public function first($data, $data_not = [])
+	{
+		$keys = array_keys($data);
+		$keys_not = array_keys($data_not);
+		$query = "select * from $this->table where ";
 
-        // GET AND RETURN THE RESULT BY USING query() function inherited from Trait Database.php
-        return $this->query($query, $data);
-    }
+		foreach ($keys as $key) {
+			$query .= $key . " = :". $key . " && ";
+		}
 
-    public function first($data, $data_not = []) {
-        /**
-         * General function to GET FIRST
-         */
+		foreach ($keys_not as $key) {
+			$query .= $key . " != :". $key . " && ";
+		}
+		
+		$query = trim($query," && ");
 
-        // GET THE KEYS OF THE ARRAY AND STORE THEM INTO $keys
-        $keys = array_keys($data);
-        $keys_not = array_keys($data_not);
+		$query .= " limit $this->limit offset $this->offset";
+		$data = array_merge($data, $data_not);
+		
+		$result = $this->query($query, $data);
+		if($result)
+			return $result[0];
 
-        // INITIALIZE QUERY STATEMENT
-        $query = "SELECT * FROM $this->table WHERE ";
+		return false;
+	}
 
-        // ADDING THE CONDITIONS TO THE QUERY
-        foreach($keys as $key) {
-            $query .= $key . " = :" . $key . " && ";
-        }
-        foreach($keys_not as $key) {
-            $query .= $key . " != :" . $key . " && ";
-        }
-        $query = trim($query, " && ");
-        $query .= " LIMIT 1 OFFSET $this->offset";
+	public function insert($data)
+	{
+		
+		/** remove unwanted data **/
+		if(!empty($this->allowedColumns))
+		{
+			foreach ($data as $key => $value) {
+				
+				if(!in_array($key, $this->allowedColumns))
+				{
+					unset($data[$key]);
+				}
+			}
+		}
 
-        /** THIS LINE SHOWS THE COMPLETE QUERY */
-        //console_log($query);
-        
-        $data = array_merge($data, $data_not);
-        $result = $this->query($query, $data);
-        if($result) {
-            return $result[0];
-        }
+		$keys = array_keys($data);
 
-        return false;
-    }
+		$query = "insert into $this->table (".implode(",", $keys).") values (:".implode(",:", $keys).")";
+		$this->query($query, $data);
 
-    public function insert($data) {
-        /**
-         * General Function for INSERT
-         */
+		return false;
+	}
 
-        /** Remove Unwanted Data */
-        if(!empty($this->allowedColumns)) {
-            foreach ($data as $key => $value) {
-                if(!in_array($key, $this->allowedColumns)) {
-                    unset($data[$key]);
-                }
-            }
-        }
-        // GET THE KEYS OF THE ARRAY AND STORE THEM INTO $keys
-        $keys = array_keys($data);
+	public function update($id, $data, $id_column = 'id')
+	{
 
-        /**
-         * PREPARE INSERT STATEMENT
-         * INSERT INTO table (column1, column2, column3) VALUES (:column1, :column2, :column3)
-         */
-        $query = "INSERT INTO $this->table (".implode(", ", $keys).") VALUES (:".implode(", :", $keys).")";
+		/** remove unwanted data **/
+		if(!empty($this->allowedColumns))
+		{
+			foreach ($data as $key => $value) {
+				
+				if(!in_array($key, $this->allowedColumns))
+				{
+					unset($data[$key]);
+				}
+			}
+		}
 
-        /** THIS LINE SHOWS THE COMPLETE QUERY */
-        // echo $query;
+		$keys = array_keys($data);
+		$query = "update $this->table set ";
 
-        // RUN THE QUERY USING query() function inherited from Trait Database.php
-        $this->query($query, $data);
+		foreach ($keys as $key) {
+			$query .= $key . " = :". $key . ", ";
+		}
 
-        return false;
-    }
+		$query = trim($query,", ");
 
-    public function update($id, $data, $id_column = 'id') {
-        
-        /** Remove Unwanted Data */
-        if(!empty($this->allowedColumns)) {
-            foreach ($data as $key => $value) {
-                if(!in_array($key, $this->allowedColumns)) {
-                    unset($data[$key]);
-                }
-            }
-        }
-        // GET THE KEYS OF THE ARRAY AND STORE THEM INTO $keys
-        $keys = array_keys($data);
+		$query .= " where $id_column = :$id_column ";
 
-        // INITIALIZE QUERY STATEMENT
-        $query = "UPDATE $this->table SET ";
+		$data[$id_column] = $id;
 
-        // ADDING THE CONDITIONS TO THE QUERY
-        foreach($keys as $key) {
-            $query .= $key . " = :" . $key . ", ";
-        }
-        $query = trim($query, ", ");
-        $query .= "  WHERE $id_column = :$id_column";
-        $data[$id_column] = $id;
+		$this->query($query, $data);
+		return false;
 
-        /** THIS LINE SHOWS THE COMPLETE QUERY (UNCOMMENT TO SHOW ON PAGE THE COMPLETE QUERY) */
-        // echo $query;
+	}
 
-        // GET AND RETURN THE RESULT BY USING query() function inherited from Trait Database.php
-        $this->query($query, $data);
-        return false;
-    }
+	public function delete($id, $id_column = 'id')
+	{
 
-    public function delete($id, $id_column = 'id') {
-        /**
-         * General Function to DELETE
-         */
+		$data[$id_column] = $id;
+		$query = "delete from $this->table where $id_column = :$id_column ";
+		$this->query($query, $data);
 
-        // INITIALIZE QUERY STATEMENT
-        $data[$id_column] = $id;
-        $query = "DELETE FROM $this->table WHERE $id_column = :$id_column";
+		return false;
 
+	}
 
-        /** THIS LINE SHOWS THE COMPLETE QUERY (UNCOMMENT TO SHOW ON PAGE THE COMPLETE QUERY) */
-        // echo $query;
-
-        // GET AND RETURN THE RESULT BY USING query() function inherited from Trait Database.php
-        $this->query($query, $data);
-
-        return false;
-    }
-
-    public function allWithRelations() {
+	public function allWithRelations() {
         // INITIALIZE QUERY STATEMENT
         $query = "SELECT $this->table.$this->table_id";
         foreach ($this->allowedColumns as $key) {
@@ -299,5 +271,5 @@ Trait Model {
 
         return false;
     }
-
+	
 }

@@ -1,11 +1,32 @@
-<?php
+<?php 
 
+namespace Controller;
+
+defined('ROOTPATH') OR exit('Access Denied!');
+
+use \Core\Session;
+use \Model\Project;
+use \Model\Worker;
+
+/**
+ * home class
+ */
 class Home {
+	use MainController;
 
-    use Controller;
+	public function index()
+	{
+		$session = new Session;
+		if(!$session->is_logged_in()) {
+			redirect('signin');
+		}
 
-    public function index() {
+		$projects = new Project;
 
-        $this->view('home');
-    }
+		$data['projects_chart'] = $projects->findAll();
+		$data['urgent'] = $projects->thisMonth();
+		
+		$this->view('home', $data);
+	}
+
 }

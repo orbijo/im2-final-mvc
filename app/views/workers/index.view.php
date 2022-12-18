@@ -168,7 +168,7 @@
 								<th class="th-sm" scope="col">Job</th>
 								<th class="th-sm" scope="col">Hire Date</th>
 								<th class="th-sm" scope="col">Salary</th>
-								<th class="th-sm" scope="col">Location</th>
+								<th class="th-sm" scope="col">Address</th>
 								<th class="th-sm" scope="col">Actions</th>
 							</tr>
 						</thead>
@@ -198,7 +198,7 @@
 									<?= $value->salary ?>
 								</td>
 								<td class="text-truncate">
-									<?= $value->address . ", " . $value->city ?>
+									<?= $value->address ?>
 								</td>
 								<td><a href="<?=ROOT?>/workers/show/<?=$value->worker_id?>"><span data-feather="edit"
 											class="align-text-bottom"></span></a></td>

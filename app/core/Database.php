@@ -1,49 +1,57 @@
 <?php
 
-Trait Database {
+namespace Model;
 
-    private function connect() {
-        // CONNECTS TO DB USING CONSTANTS DEFINED AT config.php
-        $string = "mysql:hostname=".DBHOST.";dbname=".DBNAME;
-        $con = new PDO($string, DBUSER, DBPASS);
-        return $con;
-    }
+defined('ROOTPATH') or exit('Access Denied!');
 
-    public function query($query, $data = []) {
-        /**
-         * Accepts a query, and the data to be queried
-         * Then executes the query using prepared statements
-         */
+trait Database
+{
 
-        //  CONNECT TO DB
-        $con = $this->connect();
+	private function connect()
+	{
+		$string = "mysql:hostname=" . DBHOST . ";dbname=" . DBNAME;
+		$con = new \PDO($string, DBUSER, DBPASS);
+		return $con;
+	}
 
-        // PREPARE THE QUERY STATEMENT
-        $stm = $con->prepare($query);
+	public function query($query, $data = [])
+	{
 
-        // EXECUTE QUERY
-        $check = $stm->execute($data);
-        if($check){
-            $result = $stm->fetchAll(PDO::FETCH_OBJ);
-            if(is_array($result) && count($result)) {
-                return $result;
-            }
-        }
-        return false;
-    }
+		$con = $this->connect();
+		$stm = $con->prepare($query);
 
-    public function get_row($query, $data = []) {
-        $con = $this->connect();
-        $stm = $con->prepare($query);
+		try {
+			$check = $stm->execute($data);
+			if ($check) {
+				$result = $stm->fetchAll(\PDO::FETCH_OBJ);
+				if (is_array($result) && count($result)) {
+					return $result;
+				}
+			}
+			// do other things if successfully inserted
+		} catch (\PDOException $e) {
+			if ($e->errorInfo[1] == 1062) {
+				return 1062;
+			}
+		}
+		return false;
+	}
 
-        $check = $stm->execute($data);
-        if($check){
-            $result = $stm->fetchAll(PDO::FETCH_OBJ);
-            if(is_array($result) && count($result)) {
-                return $result[0];
-            }
-        }
-        return false;
-    }
+	public function get_row($query, $data = [])
+	{
+
+		$con = $this->connect();
+		$stm = $con->prepare($query);
+
+		$check = $stm->execute($data);
+		if ($check) {
+			$result = $stm->fetchAll(\PDO::FETCH_OBJ);
+			if (is_array($result) && count($result)) {
+				return $result[0];
+			}
+		}
+
+		return false;
+	}
 
 }

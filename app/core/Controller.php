@@ -1,8 +1,13 @@
-<?php
+<?php 
 
-Trait Controller{
-    
-    private function view($name, $data = []) {
+namespace Controller;
+
+defined('ROOTPATH') OR exit('Access Denied!');
+
+Trait MainController
+{
+
+	private function view($name, $data = []) {
         if(!empty($data)){
             extract($data);
         }

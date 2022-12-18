@@ -26,20 +26,7 @@
         'December'
       ],
       datasets: [{
-        data: [
-          2,
-          2,
-          3,
-          4,
-          6,
-          4,
-          2,
-          3,
-          5,
-          3,
-          2,
-          2,
-        ],
+        data: monthdata,
         lineTension: 0,
         backgroundColor: 'transparent',
         borderColor: '#007bff',

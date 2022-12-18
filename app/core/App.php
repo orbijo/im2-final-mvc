@@ -1,53 +1,53 @@
 <?php
 
-class App {
-    private $controller = 'Home';
-    private $method = 'index';
-    private $restrictedMethods = [
-        'view',
-    ];
+defined('ROOTPATH') OR exit('Access Denied!');
 
-    private function splitURL() {
-        $URL = $_GET['url'] ?? 'home';
-        $URL = explode("/", $URL);
-        return $URL;
-    }
+class App
+{
+	private $controller = 'Home';
+	private $method 	= 'index';
 
-    private function checkMethod($method) {
-        foreach ($this->restrictedMethods as $key) {
-            if($method == $key)
-                return false;
-            return true;
-        }
-    }
+	private function splitURL()
+	{
+		$URL = $_GET['url'] ?? 'home';
+		$URL = explode("/", trim($URL,"/"));
+		return $URL;	
+	}
 
-    public function loadController() {
-        $URL = $this->splitURL();
+	public function loadController()
+	{
+		$URL = $this->splitURL();
 
-        // Select Controller
-        $filename = "../app/controllers/".ucfirst($URL[0]).".php";
-        if(file_exists($filename)){
-            require $filename;
-            $this->controller = ucfirst($URL[0]);
-            unset($URL[0]);
-        } else {
-            $filename = "../app/controllers/_404.php";
-            require $filename;
-            $this->controller = "_404";
-        }
+		/** select controller **/
+		$filename = "../app/controllers/".ucfirst($URL[0]).".php";
+		if(file_exists($filename))
+		{
+			require $filename;
+			$this->controller = ucfirst($URL[0]);
+			unset($URL[0]);
+		}else{
 
-        $controller = new $this->controller;
+			$filename = "../app/controllers/_404.php";
+			require $filename;
+			$this->controller = "_404";
+		}
 
-        // SELECT METHOD
-        if(!empty($URL[1])) {
-            if(method_exists($controller, $URL[1])) {
-                if($this->checkMethod($URL[1])) {
-                    $this->method = $URL[1];
-                }
-                unset($URL[1]);
-            }
-        }
+		$controller = new ('\Controller\\'.$this->controller);
 
-        call_user_func_array([$controller, $this->method], $URL);
-    }
+		/** select method **/
+		if(!empty($URL[1]))
+		{
+			if(method_exists($controller, $URL[1]))
+			{
+				$this->method = $URL[1];
+				unset($URL[1]);
+			}	
+		}
+
+		call_user_func_array([$controller,$this->method], $URL);
+
+	}	
+
 }
+
+

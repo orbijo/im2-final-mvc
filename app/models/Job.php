@@ -1,12 +1,18 @@
 <?php
 
-/**
- * Job Class
- */
-class Job {
-    use Model;
+namespace Model;
 
-    protected $table = 'jobs';
+defined('ROOTPATH') OR exit('Access Denied!');
+
+/**
+ * User class
+ */
+class Job
+{
+	
+	use Model;
+
+	protected $table = 'jobs';
     protected $table_id = 'job_id';
 
     protected $allowedColumns = [
@@ -15,6 +21,8 @@ class Job {
         'max_salary',
     ];
 
-    
-    
+    protected $relations = [
+
+    ];
+
 }

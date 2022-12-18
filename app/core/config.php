@@ -1,31 +1,34 @@
-<?php
+<?php 
 
-if($_SERVER['SERVER_NAME'] == 'localhost'){
-    /** If Local Host */
-    /** Database Config **/
-    define('DBNAME', 'construction_db');
-    define('DBHOST', 'localhost');
-    define('DBUSER', 'root');
-    define('DBPASS', '');
+defined('ROOTPATH') OR exit('Access Denied!');
 
-    /** Root Config **/
-    define('ROOT', 'http://localhost/im2-final-mvc/public');
+if($_SERVER['SERVER_NAME'] == 'localhost')
+{
+	/** database config **/
+	define('DBNAME', 'aops_db');
+	define('DBHOST', 'localhost');
+	define('DBUSER', 'root');
+	define('DBPASS', '');
+	define('DBDRIVER', '');
+	
+	define('ROOT', 'http://localhost/MVCFramework/public');
 
-} else {
-    /** If Hosting **/
-    /** Database Config **/
-    define('DBNAME', 'my_db');
-    define('DBHOST', 'localhost');
-    define('DBUSER', 'root');
-    define('DBPASS', '');
+}else
+{
+	/** database config **/
+	define('DBNAME', 'my_db');
+	define('DBHOST', 'localhost');
+	define('DBUSER', 'root');
+	define('DBPASS', '');
+	define('DBDRIVER', '');
 
-
-    define('ROOT', 'https://www.sitename.com');
+	define('ROOT', 'https://www.yourwebsite.com');
 
 }
 
-define('APP_NAME', 'App Name');
-define('APP_DESC', 'App Description');
+define('APP_NAME', "AOPS Construction");
+define('APP_DESC', "IM2 Final Project");
+date_default_timezone_set('Asia/Singapore');
 
-/** true means show errors */
+/** true means show errors **/
 define('DEBUG', true);

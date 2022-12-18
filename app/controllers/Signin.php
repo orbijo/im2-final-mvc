@@ -1,11 +1,50 @@
-<?php
+<?php 
 
+namespace Controller;
+
+defined('ROOTPATH') OR exit('Access Denied!');
+
+use \Model\User;
+use \Core\Request;
+use \Core\Session;
+
+/**
+ * Signin Controller
+ */
 class Signin {
+	use MainController;
 
-    use Controller;
+	public function index()
+	{
+		$data = [];
 
-    public function index() {
+		$req = new Request;
+		if($req->posted())
+		{
 
-        $this->view('home');
-    }
+			$user = new User();
+			$username = $req->post('username');
+			$password = $req->post('password');
+
+			if($row = $user->first(['username'=>$username]))
+			{
+				//check if password is correct
+				if(password_verify($password, $row->password))
+				{
+					//authenticate
+					$ses = new Session;
+					$ses->auth($row);
+
+					redirect('home');
+				}
+				
+			}
+			
+			$user->errors['username'] = "Invalid username or password";
+			$data['errors'] = $user->errors;
+		}
+
+		$this->view('signin',$data);
+	}
+
 }

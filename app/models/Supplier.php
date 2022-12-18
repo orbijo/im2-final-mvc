@@ -1,12 +1,18 @@
 <?php
 
-/**
- * Job Class
- */
-class Supplier {
-    use Model;
+namespace Model;
 
-    protected $table = 'suppliers';
+defined('ROOTPATH') OR exit('Access Denied!');
+
+/**
+ * Supplier Class
+ */
+class Supplier
+{
+	
+	use Model;
+
+	protected $table = 'suppliers';
     protected $table_id = 'supplier_id';
 
     protected $allowedColumns = [
@@ -15,9 +21,10 @@ class Supplier {
         'email',
         'phone_number',
         'address',
-        'location_id',
     ];
 
-    
-    
+    protected $relations = [
+
+    ];
+
 }

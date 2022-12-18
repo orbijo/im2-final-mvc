@@ -1,9 +1,15 @@
-<?php
+<?php 
 
-class _404 {
-    use Controller;
+namespace Controller;
 
-    public function index(){
-        echo "404 Page Controller";
-    }
+defined('ROOTPATH') OR exit('Access Denied!');
+
+class _404
+{
+	use MainController;
+	
+	public function index()
+	{
+		$this->view('404');
+	}
 }

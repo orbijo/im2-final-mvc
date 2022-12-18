@@ -1,12 +1,18 @@
 <?php
 
-/**
- * Location Class
- */
-class Location {
-    use Model;
+namespace Model;
 
-    protected $table = 'locations';
+defined('ROOTPATH') OR exit('Access Denied!');
+
+/**
+ * User class
+ */
+class Location
+{
+	
+	use Model;
+
+	protected $table = 'locations';
     protected $table_id = 'location_id';
 
     protected $allowedColumns = [
@@ -15,5 +21,9 @@ class Location {
         'state_province',
         'country_id',
     ];
-    
+
+    protected $relations = [
+        'countries' => 'country_id',
+    ];
+
 }

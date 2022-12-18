@@ -1,42 +1,100 @@
-<?php
+<?php 
 
+namespace Controller;
+
+defined('ROOTPATH') OR exit('Access Denied!');
+
+use \Model\Worker;
+use \Model\Job;
+use \Core\Request;
+use \Core\Session;
+
+/**
+ * Workers Controller
+ */
 class Workers {
+	use MainController;
 
-    use Controller;
+	public function index()	{
+		$session = new Session;
+		if(!$session->is_logged_in()) {
+			redirect('signin');
+		}
+		$workers = new Worker;
+		$data['workers'] = $workers->allWithRelations();
+        $this->view('workers', $data);
+	}
+	
+	public function add() {
+		$session = new Session;
+		if(!$session->is_logged_in()) {
+			redirect('signin');
+		}
 
-    public function index() {
-        $workers = new Worker;
-        //console_log($workers->getDetails());
-        $data['workers'] = $workers->getDetails();
+		$data = [];
 
-        $this->view('workers/index', $data);
-    }
+		$jobs = new Job;
+		$foremen = new Worker;
 
-    public function show($id = 0) {
-        $worker = new Worker;
-        $countries = new Country;
-        $locations = new Location;
+		$data['jobs'] = $jobs->findAll();
+		$row = $jobs->first(['job_title'=>'Foreman']);
 
-        $data['countries'] = $countries->findAll();
+		if($row){
+			$data['foremen'] = $foremen->where(['job_id' => $row->job_id]);
+		}
+		
+
+		$req = new Request;
+		if($req->posted()) {
+
+			$worker = new Worker();
+			
+			$req->set('hire_date', date("Y-m-d"));
+			$worker->insert($req->post());
+
+			redirect('workers');
+		}
+
+		$this->view('workers/add', $data);
+	}
+
+	public function edit($id = 0) {
+		$session = new Session;
+		if(!$session->is_logged_in()) {
+			redirect('signin');
+		}
+
+		$req = new Request;
+		if($req->posted()) {
+
+			$worker = new Worker();
+			
+			$worker->update($id, $req->post(), 'worker_id');
+
+			redirect('workers');
+		}
+		$jobs = new Job;
+		$worker = new Worker;
+
+		$row = $jobs->first(['job_title'=>'Foreman']);
+
         $data['worker'] = $worker->firstWithRelations(['worker_id'=>$id]);
-        $data['foremen'] = $worker->where(['job_id'=>2]);
-        $data['state_provinces'] = $countries->state_provinces();
-        $data['locations'] = $locations->findAll();
-        console_log($data);
+        $data['foremen'] = $worker->where(['job_id' => $row->job_id]);
 
-        $this->view('workers/show', $data);
+        $this->view('workers/edit', $data);
     }
 
-    public function add() {
-        $this->view('workers/add');
-    }
+	public function delete($id = 0) {
+		$session = new Session;
+		if(!$session->is_logged_in()) {
+			redirect('signin');
+		}
+		
+		$worker = new Worker;
 
-    public function update() {
+		$worker->delete($id, 'worker_id');
 
-        $worker = new Worker;
+		redirect('workers');
+	}
 
-        $worker->update($_POST['worker_id'], $_POST, 'worker_id');
-
-        redirect('workers');
-    }
 }

@@ -1,12 +1,18 @@
 <?php
 
-/**
- * Job Class
- */
-class Client {
-    use Model;
+namespace Model;
 
-    protected $table = 'clients';
+defined('ROOTPATH') OR exit('Access Denied!');
+
+/**
+ * Client Class
+ */
+class Client
+{
+	
+	use Model;
+
+	protected $table = 'clients';
     protected $table_id = 'client_id';
 
     protected $allowedColumns = [
@@ -15,10 +21,10 @@ class Client {
         'email',
         'phone_number',
         'address',
-        'location_id',
     ];
 
     protected $relations = [
-        'locations' => 'location_id',
+
     ];
+
 }

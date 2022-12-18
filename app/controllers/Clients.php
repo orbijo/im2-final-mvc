@@ -1,33 +1,81 @@
-<?php
+<?php 
 
+namespace Controller;
+
+defined('ROOTPATH') OR exit('Access Denied!');
+
+use \Model\Client;
+use \Core\Request;
+use \Core\Session;
+
+/**
+ * Clients Controller
+ */
 class Clients {
+	use MainController;
 
-    use Controller;
+	public function index()	{
+		$session = new Session;
+		if(!$session->is_logged_in()) {
+			redirect('signin');
+		}
+		$clients = new Client;
+		$data['clients'] = $clients->findAll();
+        $this->view('clients', $data);
+	}
 
-    public function index() {
-        $clients = new Client;
-        $data['clients'] = $clients->allWithRelations();
+	public function add() {
+		$session = new Session;
+		if(!$session->is_logged_in()) {
+			redirect('signin');
+		}
+		$data = [];
 
+		$req = new Request;
+		if($req->posted()) {
 
-        $this->view('clients/index', $data);
+			$client = new Client();
+			
+			$client->insert($req->post());
+
+			redirect('clients');
+		}
+
+		$this->view('clients/add', $data);
+	}
+
+	public function edit($id = 0) {
+		$session = new Session;
+		if(!$session->is_logged_in()) {
+			redirect('signin');
+		}
+
+		$req = new Request;
+		if($req->posted()) {
+
+			$client = new Client();
+			
+			$client->update($id, $req->post(), 'client_id');
+
+			redirect('clients');
+		}
+
+		$client = new Client();
+        $data['client'] = $client->first(['client_id'=>$id]);
+
+        $this->view('clients/edit', $data);
     }
 
-    public function add() {
-        $locations = new Location;
-        $countries = new Country;
+	public function delete($id = 0) {
+		$session = new Session;
+		if(!$session->is_logged_in()) {
+			redirect('signin');
+		}
+		$client = new Client;
 
-        $data['locations'] = $locations->findAll();
-        $data['state_provinces'] = $countries->state_provinces();
-        $data['countries'] = $countries->findAll();
+		$client->delete($id, 'client_id');
 
-        $this->view('clients/add', $data);
-    }
+		redirect('clients');
+	}
 
-    public function insert() {
-        $client = new Client;
-
-        $client->insert($_POST);
-
-        redirect('clients');
-    }
 }

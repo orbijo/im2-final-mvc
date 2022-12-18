@@ -1,16 +1,21 @@
 <?php
 
+namespace Model;
+
+defined('ROOTPATH') OR exit('Access Denied!');
+
 /**
- * Worker Class
+ * User class
  */
 class Worker
 {
-    use Model;
+	
+	use Model;
 
-    protected $table = 'workers';
+	protected $table = 'workers';
     protected $table_id = 'worker_id';
 
-    protected $allowedColumns = [
+	protected $allowedColumns = [
         'first_name',
         'last_name',
         'email',
@@ -19,21 +24,11 @@ class Worker
         'job_id',
         'salary',
         'foreman_id',
-        'location_id',
+        'hire_date',
     ];
 
     protected $relations = [
         'jobs' => 'job_id',
-        'locations' => 'location_id',
-        // 'workers' => 'foreman_id',
     ];
-
-    public function getDetails()
-    {
-        $query = "SELECT workers.*, jobs.job_title, locations.city, locations.state_province FROM workers
-        LEFT JOIN jobs ON workers.job_id = jobs.job_id
-        LEFT JOIN locations ON workers.location_id = locations.location_id ORDER BY $this->table_id $this->order_type LIMIT $this->limit OFFSET $this->offset";
-        return $this->query($query);
-    }
 
 }
