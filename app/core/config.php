@@ -5,13 +5,13 @@ defined('ROOTPATH') OR exit('Access Denied!');
 if($_SERVER['SERVER_NAME'] == 'localhost')
 {
 	/** database config **/
-	define('DBNAME', 'aops_db');
+	define('DBNAME', 'construction_db');
 	define('DBHOST', 'localhost');
 	define('DBUSER', 'root');
 	define('DBPASS', '');
 	define('DBDRIVER', '');
 	
-	define('ROOT', 'http://localhost/MVCFramework/public');
+	define('ROOT', 'http://localhost/im2-final-mvc/public');
 
 }else
 {
