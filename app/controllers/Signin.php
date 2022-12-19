@@ -18,6 +18,11 @@ class Signin {
 	{
 		$data = [];
 
+		$session = new Session;
+		if($session->is_logged_in()) {
+			redirect('');
+		}
+
 		$req = new Request;
 		if($req->posted())
 		{

@@ -94,11 +94,7 @@
 
             <button class="mt-3 w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
 
-            <div class="form-floating mt-3">
-                <a disabled href="<?=ROOT?>/signup" class="link-primary">Dont have an account? Sign-up Here</a>
-            </div>
-
-            <p class="mt-5 mb-3 text-muted">&copy; 2017–2022</p>
+            <p class="mt-5 mb-3 text-muted">&copy; 2022</p>
         </form>
     </main>
 

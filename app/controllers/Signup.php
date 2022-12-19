@@ -6,6 +6,7 @@ defined('ROOTPATH') OR exit('Access Denied!');
 
 use \Model\User;
 use \Core\Request;
+use \Core\Session;
 
 /**
  * Signup Class
@@ -15,6 +16,11 @@ class Signup {
 
 	public function index()
 	{
+		$session = new Session;
+		if(!$session->is_logged_in()) {
+			redirect('signin');
+		}
+
 		$data = [];
 
 		$req = new Request;

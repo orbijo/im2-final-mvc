@@ -95,25 +95,29 @@
                 <div class="position-sticky pt-3 sidebar-sticky">
                     <ul class="nav flex-column">
                         <li class="nav-item">
-                            <a class="nav-link <?php echo ($page == "home" ? "active" : "") ?>" aria-current="page" href="<?= ROOT ?>/home">
+                            <a class="nav-link <?php echo ($page == "home" ? "active" : "") ?>" aria-current="page"
+                                href="<?= ROOT ?>/home">
                                 <span data-feather="home" class="align-text-bottom"></span>
                                 Dashboard
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link <?php echo ($page == "projects" ? "active" : "") ?>" href="<?= ROOT ?>/projects">
+                            <a class="nav-link <?php echo ($page == "projects" ? "active" : "") ?>"
+                                href="<?= ROOT ?>/projects">
                                 <span data-feather="layers" class="align-text-bottom"></span>
                                 Projects
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link <?php echo ($page == "clients" ? "active" : "") ?>" href="<?= ROOT ?>/clients">
+                            <a class="nav-link <?php echo ($page == "clients" ? "active" : "") ?>"
+                                href="<?= ROOT ?>/clients">
                                 <span data-feather="users" class="align-text-bottom"></span>
                                 Clients
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link <?php echo ($page == "suppliers" ? "active" : "") ?>" href="<?= ROOT ?>/suppliers">
+                            <a class="nav-link <?php echo ($page == "suppliers" ? "active" : "") ?>"
+                                href="<?= ROOT ?>/suppliers">
                                 <span data-feather="package" class="align-text-bottom"></span>
                                 Suppliers
                             </a>
@@ -126,7 +130,8 @@
                     </h6>
                     <ul class="nav flex-column mb-2">
                         <li class="nav-item">
-                            <a class="nav-link <?php echo ($page == "workers" ? "active" : "") ?>" href="<?= ROOT ?>/workers">
+                            <a class="nav-link <?php echo ($page == "workers" ? "active" : "") ?>"
+                                href="<?= ROOT ?>/workers">
                                 <span data-feather="users" class="align-text-bottom"></span>
                                 Workers
                             </a>
@@ -138,13 +143,27 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link <?php echo ($page == "locations" ? "active" : "") ?>" href="<?= ROOT ?>/locations">
+                            <a class="nav-link <?php echo ($page == "locations" ? "active" : "") ?>"
+                                href="<?= ROOT ?>/locations">
                                 <span data-feather="map-pin" class="align-text-bottom"></span>
                                 Locations
                             </a>
                         </li>
                     </ul>
+
+                    <h6
+                        class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted text-uppercase">
+                        <span>Access</span>
+                    </h6>
+                    <ul class="nav flex-column mb-2">
+                        <li class="nav-item">
+                            <a class="nav-link <?php echo ($page == "access" ? "active" : "") ?>" href="<?= ROOT ?>/signup">
+                                <span data-feather="users" class="align-text-bottom"></span>
+                                Add Admin Account
+                            </a>
+                        </li>
+                    </ul>
                 </div>
             </nav>
-
+            <!--  -->
             <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">

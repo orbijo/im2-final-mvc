@@ -77,7 +77,7 @@
             <h1 class="h1 mb-3 fw-normal">
                 <?= APP_NAME ?>
             </h1>
-            <h1 class="h3 mb-3 fw-normal">Sign Up</h1>
+            <h1 class="h3 mb-3 fw-normal">New Admin</h1>
 
             <?php if(!empty($errors)): ?>
                 <div class="alert alert-danger text-center">Please Fix Errors</div>
@@ -101,10 +101,10 @@
             <button class="mt-3 w-100 btn btn-lg btn-primary" type="submit">Sign Up</button>
 
             <div class="form-floating mt-3">
-                <a disabled href="<?=ROOT?>/signin" class="link-primary">Already have an account? Sign-in Here</a>
+                <a disabled href="<?=ROOT?>/" class="link-primary">Back</a>
             </div>
 
-            <p class="mt-5 mb-3 text-muted">&copy; 2017–2022</p>
+            <p class="mt-5 mb-3 text-muted">&copy; 2022</p>
         </form>
     </main>
 

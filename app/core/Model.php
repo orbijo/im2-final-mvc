@@ -11,7 +11,7 @@ Trait Model
 {
 	use Database;
 
-	protected $limit 		= 25;
+	protected $limit 		= 50;
 	protected $offset 		= 0;
 	protected $order_type 	= "asc";
 	public $errors 		= [];
