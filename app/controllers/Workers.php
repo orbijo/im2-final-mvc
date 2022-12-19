@@ -59,6 +59,7 @@ class Workers {
 	}
 
 	public function edit($id = 0) {
+		$data['foreman_job'] = 0;
 		$session = new Session;
 		if(!$session->is_logged_in()) {
 			redirect('signin');
@@ -80,6 +81,8 @@ class Workers {
 
         $data['worker'] = $worker->firstWithRelations(['worker_id'=>$id]);
         $data['foremen'] = $worker->where(['job_id' => $row->job_id]);
+		$data['foreman_job'] = $jobs->first(['job_title'=>'Foreman']);
+		$data['jobs'] = $jobs->findAll();
 
         $this->view('workers/edit', $data);
     }

@@ -35,7 +35,7 @@
         <div class="col-sm-6">
             <label for="end_date" class="form-label">End Date</label>
             <input name="end_date" type="date" class="form-control" id="end_date" placeholder="End Date" value=""
-                required min="<?= date("Y-m-d") ?>">
+                required>
             <div class="invalid-feedback">
                 Please enter a valid date
             </div>
