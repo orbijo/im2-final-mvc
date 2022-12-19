@@ -35,156 +35,55 @@
 
 
 
-<h2>Section title</h2>
+<h2>Workers With The Most Amount Of Projects</h2>
 <div class="table-responsive">
   <table class="table table-striped table-sm">
     <thead>
       <tr>
         <th scope="col">#</th>
-        <th scope="col">Header</th>
-        <th scope="col">Header</th>
-        <th scope="col">Header</th>
-        <th scope="col">Header</th>
+        <th scope="col">Name</th>
+        <th scope="col">Salary</th>
+        <th scope="col">Project Count</th>
       </tr>
     </thead>
     <tbody>
+      <?php if ($hardworking): ?>
+      <?php foreach ($hardworking as $key => $value): ?>
       <tr>
-        <td>1,001</td>
-        <td>random</td>
-        <td>data</td>
-        <td>placeholder</td>
-        <td>text</td>
+        <td><?=$value->worker_id?></td>
+        <td><a href="<?=ROOT?>/workers/edit/<?=$value->worker_id?>"><?=$value->first_name?> <?=$value->last_name?></a></td>
+        <td><?=$value->salary?></td>
+        <td><?=$value->project_count?></td>
       </tr>
-      <tr>
-        <td>1,002</td>
-        <td>placeholder</td>
-        <td>irrelevant</td>
-        <td>visual</td>
-        <td>layout</td>
-      </tr>
-      <tr>
-        <td>1,003</td>
-        <td>data</td>
-        <td>rich</td>
-        <td>dashboard</td>
-        <td>tabular</td>
-      </tr>
-      <tr>
-        <td>1,003</td>
-        <td>information</td>
-        <td>placeholder</td>
-        <td>illustrative</td>
-        <td>data</td>
-      </tr>
-      <tr>
-        <td>1,004</td>
-        <td>text</td>
-        <td>random</td>
-        <td>layout</td>
-        <td>dashboard</td>
-      </tr>
-      <tr>
-        <td>1,005</td>
-        <td>dashboard</td>
-        <td>irrelevant</td>
-        <td>text</td>
-        <td>placeholder</td>
-      </tr>
-      <tr>
-        <td>1,006</td>
-        <td>dashboard</td>
-        <td>illustrative</td>
-        <td>rich</td>
-        <td>data</td>
-      </tr>
-      <tr>
-        <td>1,007</td>
-        <td>placeholder</td>
-        <td>tabular</td>
-        <td>information</td>
-        <td>irrelevant</td>
-      </tr>
-      <tr>
-        <td>1,008</td>
-        <td>random</td>
-        <td>data</td>
-        <td>placeholder</td>
-        <td>text</td>
-      </tr>
-      <tr>
-        <td>1,009</td>
-        <td>placeholder</td>
-        <td>irrelevant</td>
-        <td>visual</td>
-        <td>layout</td>
-      </tr>
-      <tr>
-        <td>1,010</td>
-        <td>data</td>
-        <td>rich</td>
-        <td>dashboard</td>
-        <td>tabular</td>
-      </tr>
-      <tr>
-        <td>1,011</td>
-        <td>information</td>
-        <td>placeholder</td>
-        <td>illustrative</td>
-        <td>data</td>
-      </tr>
-      <tr>
-        <td>1,012</td>
-        <td>text</td>
-        <td>placeholder</td>
-        <td>layout</td>
-        <td>dashboard</td>
-      </tr>
-      <tr>
-        <td>1,013</td>
-        <td>dashboard</td>
-        <td>irrelevant</td>
-        <td>text</td>
-        <td>visual</td>
-      </tr>
-      <tr>
-        <td>1,014</td>
-        <td>dashboard</td>
-        <td>illustrative</td>
-        <td>rich</td>
-        <td>data</td>
-      </tr>
-      <tr>
-        <td>1,015</td>
-        <td>random</td>
-        <td>tabular</td>
-        <td>information</td>
-        <td>text</td>
-      </tr>
+      <?php endforeach; ?>
+      <?php endif; ?>
     </tbody>
   </table>
 </div>
 <script>
   var project_data = <?php echo json_encode($projects_chart); ?>;
-  var monthdata = [0,0,0,0,0,0,0,0,0,0,0,0]
-      var year = new Date();
-      var floor = new Date(year.getFullYear()+'-1-1');
-      var ceiling = new Date(year.getFullYear()+'-12-31');
-      
-      project_data.forEach(element => {
-        var start = new Date(element.start_date);
-        var end = new Date(element.end_date);
-        if(start < floor){
-          start = floor;
-        }
-        if(end > ceiling){
-          end = ceiling;
-        }
-        i = start.getMonth();
-        while (i <= end.getMonth()) {
-          monthdata[i]++;
-          i++;
-        }
-      });
+  var monthdata = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+  var year = new Date();
+  var floor = new Date(year.getFullYear() + '-1-1');
+  var ceiling = new Date(year.getFullYear() + '-12-31');
+
+  project_data.forEach(element => {
+    var start = new Date(element.start_date);
+    var end = new Date(element.end_date);
+    if (end > floor) {
+      if (start < floor) {
+        start = floor;
+      }
+      if (end > ceiling) {
+        end = ceiling;
+      }
+      i = start.getMonth();
+      while (i <= end.getMonth()) {
+        monthdata[i]++;
+        i++;
+      }
+    }
+  });
 
 </script>
 <?php $this->view('footer') ?>

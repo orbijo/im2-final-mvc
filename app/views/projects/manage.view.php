@@ -25,11 +25,11 @@
                     <?php endif; ?>
                 </select>
                 <button class="btn btn-outline-success" type="submit" value="submit" name="submit_worker"
-                    id="button-addon2"><span data-feather="plus" class="align-text-center"></span> Add</button>
+                    id="button-addon2"><span data-feather="plus" class="align-text-center"></span> Add Worker</button>
             </div>
         </form>
 
-        <?php console_log($workers) ?>
+        <h1 class="h5">Workers</h1>
         <div class="table-responsive">
             <table id="workersTable" class="table table-striped table-sm">
                 <thead>
@@ -85,10 +85,11 @@
                     <?php endif; ?>
                 </select>
                 <button class="btn btn-outline-success" type="submit" value="submit" name="submit_supplier"
-                    id="button-addon2"><span data-feather="plus" class="align-text-center"></span> Add</button>
+                    id="button-addon2"><span data-feather="plus" class="align-text-center"></span> Add Supplier</button>
             </div>
         </form>
-
+        
+        <h1 class="h5">Suppliers</h1>
         <div class="table-responsive">
             <table id="suppliersTable" class="table table-striped table-sm">
                 <thead>

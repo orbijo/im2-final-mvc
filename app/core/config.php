@@ -5,7 +5,7 @@ defined('ROOTPATH') OR exit('Access Denied!');
 if($_SERVER['SERVER_NAME'] == 'localhost')
 {
 	/** database config **/
-	define('DBNAME', 'construction_db');
+	define('DBNAME', 'aops_db');
 	define('DBHOST', 'localhost');
 	define('DBUSER', 'root');
 	define('DBPASS', '');

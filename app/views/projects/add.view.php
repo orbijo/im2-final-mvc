@@ -26,7 +26,7 @@
         <div class="col-sm-6">
             <label for="start_date" class="form-label">Start Date</label>
             <input name="start_date" type="date" class="form-control" id="start_date" placeholder="Start Date" value=""
-                required min="<?= date("Y-m-d") ?>">
+                required>
             <div class="invalid-feedback">
                 Please enter a valid date
             </div>

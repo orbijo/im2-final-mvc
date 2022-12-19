@@ -22,9 +22,11 @@ class Home {
 		}
 
 		$projects = new Project;
+		$workers = new Worker;
 
 		$data['projects_chart'] = $projects->findAll();
 		$data['urgent'] = $projects->thisMonth();
+		$data['hardworking'] = $workers->getHardworking();
 		
 		$this->view('home', $data);
 	}
