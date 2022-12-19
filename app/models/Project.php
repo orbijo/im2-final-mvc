@@ -45,7 +45,7 @@ class Project
                 LEFT JOIN workers ON projects.foreman_id = workers.worker_id 
                     LEFT JOIN clients ON projects.client_id = clients.client_id 
                         LEFT JOIN locations ON projects.location_id = locations.location_id 
-            ORDER BY project_id asc LIMIT 25 OFFSET 0";
+            ORDER BY project_id asc";
 
         /** THIS LINE SHOWS THE COMPLETE QUERY (UNCOMMENT TO SHOW ON PAGE THE COMPLETE QUERY) */
         // console_log($query);
@@ -62,10 +62,6 @@ class Project
         ORDER BY end_date ASC";
 
         return $this->query($query);
-    }
-
-    public function thisYear() {
-        
     }
 
 }
