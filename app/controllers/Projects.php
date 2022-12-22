@@ -30,7 +30,6 @@ class Projects {
 		$projects = new Project;
 
 		$data['projects'] = $projects->allWithRelations();
-		// console_log($data['projects']);
 		
         $this->view('projects', $data);
 	}
@@ -125,7 +124,6 @@ class Projects {
 
 		$req = new Request;
 		if($req->posted()) {
-			console_log($req->post());
 			$project = new Project();
 			
 			$project->update($id, $req->post(), 'project_id');
@@ -146,7 +144,6 @@ class Projects {
 		$data['clients'] = $clients->findAll();
 		$data['locations'] = $locations->allWithRelations();
 
-		console_log($data['project']);
         $this->view('projects/edit', $data);
     }
 

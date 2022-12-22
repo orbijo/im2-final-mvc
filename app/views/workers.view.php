@@ -48,7 +48,7 @@
 					<?= date("F j, Y", strtotime($value->hire_date)) ?>
 				</td>
 				<td>
-					<?= $value->salary ?>
+					<?= number_format($value->salary, 2) ?>
 				</td>
 				<td class="text-truncate">
 					<?= $value->address ?>

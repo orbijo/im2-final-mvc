@@ -2,20 +2,20 @@
 
 namespace Model;
 
-defined('ROOTPATH') OR exit('Access Denied!');
+defined('ROOTPATH') or exit('Access Denied!');
 
 /**
  * User class
  */
 class Worker
 {
-	
-	use Model;
 
-	protected $table = 'workers';
+    use Model;
+
+    protected $table = 'workers';
     protected $table_id = 'worker_id';
 
-	protected $allowedColumns = [
+    protected $allowedColumns = [
         'first_name',
         'last_name',
         'email',
@@ -31,11 +31,14 @@ class Worker
         'jobs' => 'job_id',
     ];
 
-    public function getHardworking() {
+    public function getHardworking()
+    {
         $query = "SELECT workers.worker_id, workers.first_name, workers.last_name, workers.salary, COUNT(project_workers.project_id) as project_count FROM project_workers JOIN workers ON project_workers.worker_id = workers.worker_id 
         WHERE workers.job_id != (SELECT jobs.job_id FROM jobs WHERE jobs.job_title = 'Foreman') 
-        GROUP BY project_workers.worker_id ORDER BY COUNT(project_workers.project_id) DESC
+        GROUP BY project_workers.worker_id ORDER BY COUNT(project_workers.project_id) DESC LIMIT 10
         ";
+
+        // console_log($query);
 
         return $this->query($query);
     }

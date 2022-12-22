@@ -34,6 +34,28 @@
 </div>
 
 
+<h2>Average Budget for each Location</h2>
+<div class="table-responsive">
+  <table class="table table-striped table-sm">
+    <thead>
+      <tr>
+        <th scope="col">City</th>
+        <th scope="col">Average Budget</th>
+      </tr>
+    </thead>
+    <tbody>
+      <?php if ($averageBudget): ?>
+      <?php foreach ($averageBudget as $key => $value): ?>
+      <tr>
+        <td><?=$value->city?></td>
+        <td><?=number_format($value->avgbudget, 2)?></td>
+      </tr>
+      <?php endforeach; ?>
+      <?php endif; ?>
+    </tbody>
+  </table>
+</div>
+
 
 <h2>Workers With The Most Amount Of Projects</h2>
 <div class="table-responsive">
@@ -52,7 +74,7 @@
       <tr>
         <td><?=$value->worker_id?></td>
         <td><a href="<?=ROOT?>/workers/edit/<?=$value->worker_id?>"><?=$value->first_name?> <?=$value->last_name?></a></td>
-        <td><?=$value->salary?></td>
+        <td><?=number_format($value->salary, 2)?></td>
         <td><?=$value->project_count?></td>
       </tr>
       <?php endforeach; ?>
@@ -60,6 +82,7 @@
     </tbody>
   </table>
 </div>
+
 <script>
   var project_data = <?php echo json_encode($projects_chart); ?>;
   var monthdata = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]

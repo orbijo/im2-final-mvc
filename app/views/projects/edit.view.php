@@ -1,7 +1,7 @@
 <?php $data['page'] = 'projects'; ?>
 <?php $this->view('header', $data) ?>
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-    <h1 class="h2">New Project</h1>
+    <h1 class="h2"><?=$project?$project->project_name:'NaN'?></h1>
 </div>
 <?php if ($project): ?>
 <form method="post" class="needs-validation px-5" novalidate>
@@ -27,8 +27,7 @@
         <div class="col-sm-6">
             <label for="start_date" class="form-label">Start Date</label>
             <input name="start_date" type="date" class="form-control" id="start_date"
-                placeholder="<?= $project->start_date ?>" value="<?= $project->start_date ?>" required
-                min="<?= date("Y-m-d") ?>">
+                placeholder="<?= $project->start_date ?>" value="<?= $project->start_date ?>" required>
             <div class="invalid-feedback">
                 Please enter a valid date
             </div>
@@ -37,8 +36,7 @@
         <div class="col-sm-6">
             <label for="end_date" class="form-label">End Date</label>
             <input name="end_date" type="date" class="form-control" id="end_date"
-                placeholder="<?= $project->end_date ?>" value="<?= $project->end_date ?>" required
-                min="<?= date("Y-m-d") ?>">
+                placeholder="<?= $project->end_date ?>" value="<?= $project->end_date ?>" required>
             <div class="invalid-feedback">
                 Please enter a valid date
             </div>
@@ -119,7 +117,7 @@
 
     <hr class="my-4">
 
-    <button class="w-100 btn btn-primary btn-lg" type="submit" value="submit" name="submit">Add Project</button>
+    <button class="w-100 btn btn-primary btn-lg" type="submit" value="submit" name="submit">Edit Project</button>
 
 </form>
 

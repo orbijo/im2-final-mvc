@@ -21,7 +21,7 @@ Trait Model
         $query = "SELECT * FROM $this->table ORDER BY $this->table_id $this->order_type LIMIT $this->limit OFFSET $this->offset";
 
         /** THIS LINE SHOWS THE COMPLETE QUERY (UNCOMMENT TO SHOW ON PAGE THE COMPLETE QUERY) */
-        // echo $query;
+        // console_log($query);
 
         return $this->query($query);
     }
@@ -35,7 +35,7 @@ Trait Model
 		foreach ($keys as $key) {
 			$query .= $key . " = :". $key . " && ";
 		}
-
+        
 		foreach ($keys_not as $key) {
 			$query .= $key . " != :". $key . " && ";
 		}
@@ -43,6 +43,9 @@ Trait Model
 		$query = trim($query," && ");
 
 		$query .= " ORDER BY $this->table_id $this->order_type LIMIT $this->limit OFFSET $this->offset";
+
+        // console_log($query);
+
 		$data = array_merge($data, $data_not);
 
 		return $this->query($query, $data);
@@ -66,6 +69,8 @@ Trait Model
 
 		$query .= " limit $this->limit offset $this->offset";
 		$data = array_merge($data, $data_not);
+
+        // console_log($query);
 		
 		$result = $this->query($query, $data);
 		if($result)
@@ -92,6 +97,9 @@ Trait Model
 		$keys = array_keys($data);
 
 		$query = "insert into $this->table (".implode(",", $keys).") values (:".implode(",:", $keys).")";
+
+        // console_log($query);
+
 		$this->query($query, $data);
 
 		return false;
@@ -123,6 +131,8 @@ Trait Model
 
 		$query .= " where $id_column = :$id_column ";
 
+        // console_log($query);
+
 		$data[$id_column] = $id;
 
 		$this->query($query, $data);
@@ -135,6 +145,9 @@ Trait Model
 
 		$data[$id_column] = $id;
 		$query = "delete from $this->table where $id_column = :$id_column ";
+
+        // console_log($query);
+
 		$this->query($query, $data);
 
 		return false;
@@ -212,7 +225,7 @@ Trait Model
         $data = array_merge($data, $data_not);
 
         /** THIS LINE SHOWS THE COMPLETE QUERY (UNCOMMENT TO SHOW ON PAGE THE COMPLETE QUERY) */
-        //console_log($query);
+        // console_log($query);
 
         // GET AND RETURN THE RESULT BY USING query() function inherited from Trait Database.php
         return $this->query($query, $data);
@@ -261,7 +274,7 @@ Trait Model
         $data = array_merge($data, $data_not);
 
         /** THIS LINE SHOWS THE COMPLETE QUERY (UNCOMMENT TO SHOW ON PAGE THE COMPLETE QUERY) */
-        //console_log($query);
+        // console_log($query);
 
         $data = array_merge($data, $data_not);
         $result = $this->query($query, $data);

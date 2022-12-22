@@ -32,10 +32,10 @@
 					<?= $value->job_title ?>
 				</td>
 				<td>
-					<?= $value->min_salary ?>
+					<?= number_format($value->min_salary, 2) ?>
 				</td>
 				<td>
-					<?= $value->max_salary ?>
+					<?= number_format($value->max_salary, 2) ?>
 				</td>
 				<td>
 					<a href="<?= ROOT ?>/jobs/edit/<?= $value->job_id ?>"><span data-feather="edit"

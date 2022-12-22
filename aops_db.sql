@@ -21,8 +21,8 @@ CREATE TABLE `countries` (
 CREATE TABLE `jobs` (
   `job_id` int(11) NOT NULL AUTO_INCREMENT,
   `job_title` varchar(255) NOT NULL,
-  `min_salary` decimal(19,4) NOT NULL,
-  `max_salary` decimal(19,4) NOT NULL,
+  `min_salary` decimal(19,2) NOT NULL,
+  `max_salary` decimal(19,2) NOT NULL,
   PRIMARY KEY (`job_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -44,7 +44,7 @@ CREATE TABLE `projects` (
   `end_date` date NOT NULL,
   `foreman_id` int(11) DEFAULT NULL,
   `client_id` int(11) NOT NULL,
-  `budget` decimal(19,4) NOT NULL,
+  `budget` decimal(19,2) NOT NULL,
   `location_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`project_id`),
   KEY `project_location_fk` (`location_id`),
@@ -98,7 +98,7 @@ CREATE TABLE `workers` (
   `address` varchar(255) NOT NULL DEFAULT '',
   `hire_date` date NOT NULL,
   `job_id` int(11) DEFAULT NULL,
-  `salary` decimal(19,4) NOT NULL,
+  `salary` decimal(19,2) NOT NULL,
   `foreman_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`worker_id`),
   KEY `worker_foreman_fk` (`foreman_id`),
@@ -227,13 +227,17 @@ VALUES
 ('Cebu Esports Complex', '2019-02-11', '2021-04-30', 17, 5, 77262121.93, 1),
 ('Manila Student Hub', '2015-07-02', '2016-11-22', 5, 6, 21790200.00, 2),
 ('New York Law Library', '2013-07-13', '2014-12-01', 25, 3, 429200114.20, 3),
-('Korea BBQ Central', '2020-01-06', '2020-11-15', 1,7, 112002359.49, 5),
+('Korea BBQ Central', '2020-01-06', '2023-11-15', 1,7, 112002359.49, 5),
 ('Singapore National Academy', '2013-09-22', '2015-05-03', 21, 2, 497209661.71, 7),
 ('Melbourne Wildlife Center', '2011-03-02', '2012-10-28', 9, 4, 113572235.97, 4),
 ('Visayas Asylum', '2011-04-19', '2013-01-22', 25, 1, 15662197.03, 1),
 ('Cebu Cycle Track', '2013-04-11', '2013-12-20', 13, 6, 5351743.36, 1),
 ('Philippine National Library', '2010-12-11', '2012-03-22', 29, 3, 15662197.03, 2),
-('Melbourne Childrens Hospital', '2014-08-12', '2016-10-10', 21, 4, 113572235.97, 4);
+('Melbourne Childrens Hospital', '2014-08-12', '2016-10-10', 21, 4, 113572235.97, 4),
+('Australia Cultural Center', '2014-11-12', '2022-12-30', 5, 1, 498372235.97, 4),
+('Tokyo Pokemon Center', '2019-11-21', '2022-12-25', 29, 3, 512889341.09, 8),
+('Cebu Target Center', '2018-09-25', '2022-12-27', 9, 6, 512889341.09, 1),
+('Cebu North Road Properties', '2019-11-21', '2023-02-25', 1, 2, 512889341.09, 1);
 
 INSERT INTO `project_workers`(`project_id`, `worker_id`)
 VALUES

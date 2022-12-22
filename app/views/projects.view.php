@@ -26,7 +26,6 @@
 		</thead>
 		<tbody>
 			<?php if ($projects): ?>
-			<?php console_log($projects) ?>
 			<?php foreach ($projects as $key => $value): ?>
 			<tr>
 				<td>
@@ -39,7 +38,7 @@
 					<?= get_date($value->start_date) . ' - ' . get_date($value->end_date) ?>
 				</td>
 				<td>
-					<?= $value->budget ?>
+					<?= number_format($value->budget, 2) ?>
 				</td>
 				<td>
 					<?= $value->foremanFname . ' ' . $value->foremanLname ?>

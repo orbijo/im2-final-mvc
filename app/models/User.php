@@ -56,6 +56,8 @@ class User
 			);
 		";
 
+		// console_log($query);
+
 		$this->query($query);
 	}
 

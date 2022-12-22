@@ -27,6 +27,8 @@ class Home {
 		$data['projects_chart'] = $projects->findAll();
 		$data['urgent'] = $projects->thisMonth();
 		$data['hardworking'] = $workers->getHardworking();
+		$data['averageBudget'] = $projects->averageBudget();
+		
 		
 		$this->view('home', $data);
 	}

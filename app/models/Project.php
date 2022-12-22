@@ -2,17 +2,17 @@
 
 namespace Model;
 
-defined('ROOTPATH') OR exit('Access Denied!');
+defined('ROOTPATH') or exit('Access Denied!');
 
 /**
  * User class
  */
 class Project
 {
-	
-	use Model;
 
-	protected $table = 'projects';
+    use Model;
+
+    protected $table = 'projects';
     protected $table_id = 'project_id';
 
     protected $allowedColumns = [
@@ -38,7 +38,8 @@ class Project
     ];
 
 
-    public function allWithRelations() {
+    public function allWithRelations()
+    {
         // INITIALIZE QUERY STATEMENT
         $query = "SELECT projects.*, workers.first_name AS foremanFname, workers.last_name AS foremanLname, clients.first_name AS clientFname, clients.last_name AS clientLname, locations.* 
             FROM projects 
@@ -54,12 +55,27 @@ class Project
         return $this->query($query);
     }
 
-    public function thisMonth() {
+    public function thisMonth()
+    {
         $query = "SELECT *
         FROM projects
         WHERE MONTH(end_date) = MONTH(CURRENT_DATE())
         AND YEAR(end_date) = YEAR(CURRENT_DATE())
         ORDER BY end_date ASC";
+
+        // console_log($query);
+
+        return $this->query($query);
+    }
+
+    public function averageBudget()
+    {
+        $query = "SELECT l.city as 'city', ROUND(AVG(p.budget), 2) as 'avgbudget'
+        FROM projects p
+        INNER JOIN locations l ON p.location_id = l.location_id
+        GROUP BY l.location_id";
+
+        // console_log($query);
 
         return $this->query($query);
     }
